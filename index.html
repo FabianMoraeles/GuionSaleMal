@@ -1,0 +1,746 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Asesinato en la Mansión España</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&family=Courier+Prime:ital,wght@0,400;0,700;1,400&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f4efe4;
+    --paper: #fffdf8;
+    --ink: #1f1b16;
+    --muted: #6f665a;
+    --rule: #e2d9c8;
+    --pen: #1f4fb8;
+    --accent: #9b1c1c;
+    --accent-ink: #ffffff;
+    --cue-bg: #f7ecd9;
+    --cue-border: #d9c39c;
+    --cue-fill: #e8c98c;
+    --sfx-bg: #eef2fb;
+    --sfx-border: #b9c8ec;
+    --sfx-fill: #a9c0f2;
+    --pending: #b7aa96;
+    --hl: #fff1b8;
+    --shadow: 0 1px 2px rgb(0 0 0 / .06), 0 6px 24px rgb(0 0 0 / .06);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #15120f;
+      --paper: #1e1a16;
+      --ink: #ece4d6;
+      --muted: #a39886;
+      --rule: #342d25;
+      --pen: #8fb0ff;
+      --accent: #e0574f;
+      --accent-ink: #1a0d0c;
+      --cue-bg: #2c2419;
+      --cue-border: #5a4728;
+      --cue-fill: #7a5c2a;
+      --sfx-bg: #1c2333;
+      --sfx-border: #34446a;
+      --sfx-fill: #3b5694;
+      --pending: #6c6253;
+      --hl: #3a3218;
+      --shadow: 0 1px 2px rgb(0 0 0 / .4), 0 6px 24px rgb(0 0 0 / .35);
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #15120f;
+    --paper: #1e1a16;
+    --ink: #ece4d6;
+    --muted: #a39886;
+    --rule: #342d25;
+    --pen: #8fb0ff;
+    --accent: #e0574f;
+    --accent-ink: #1a0d0c;
+    --cue-bg: #2c2419;
+    --cue-border: #5a4728;
+    --cue-fill: #7a5c2a;
+    --sfx-bg: #1c2333;
+    --sfx-border: #34446a;
+    --sfx-fill: #3b5694;
+    --pending: #6c6253;
+    --hl: #3a3218;
+    --shadow: 0 1px 2px rgb(0 0 0 / .4), 0 6px 24px rgb(0 0 0 / .35);
+  }
+
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; scroll-padding-top: 90px; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font: 17px/1.55 "Courier Prime", "Courier New", monospace;
+    padding-bottom: 120px;
+  }
+
+  /* ---------- Header ---------- */
+  header {
+    position: sticky; top: 0; z-index: 20;
+    background: color-mix(in srgb, var(--bg) 88%, transparent);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--rule);
+  }
+  .bar {
+    max-width: 1040px; margin: 0 auto; padding: 10px 16px;
+    display: flex; gap: 12px; align-items: center; flex-wrap: wrap;
+  }
+  .bar h1 {
+    font: italic 700 1.25rem/1.1 "Playfair Display", Georgia, serif;
+    margin: 0; flex: 1 1 auto; min-width: 200px;
+  }
+  .bar h1 small {
+    display: block; font: 400 .72rem/1.3 "Courier Prime", monospace;
+    font-style: normal; color: var(--muted); letter-spacing: .04em;
+  }
+  .ctrl { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+  select, .btn {
+    font: inherit; font-size: .82rem; color: var(--ink);
+    background: var(--paper); border: 1px solid var(--rule);
+    border-radius: 8px; padding: 6px 10px; cursor: pointer;
+  }
+  .btn:hover, select:hover { border-color: var(--muted); }
+  .btn.on { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+
+  /* ---------- Script ---------- */
+  main {
+    max-width: 1040px; margin: 24px auto; padding: 0 16px;
+  }
+  .sheet {
+    background: var(--paper); border-radius: 14px; box-shadow: var(--shadow);
+    padding: 28px 28px 40px;
+  }
+  .page-mark {
+    display: flex; align-items: center; gap: 12px;
+    color: var(--muted); font-size: .78rem; letter-spacing: .14em; text-transform: uppercase;
+    margin: 34px 0 14px;
+  }
+  .page-mark:first-child { margin-top: 0; }
+  .page-mark::before, .page-mark::after { content: ""; height: 1px; background: var(--rule); flex: 1; }
+  .missing {
+    text-align: center; color: var(--muted); font-style: italic;
+    border: 1px dashed var(--rule); border-radius: 10px; padding: 14px;
+  }
+
+  .row {
+    display: grid;
+    grid-template-columns: 9.5rem minmax(0, 1fr) minmax(0, 15rem);
+    gap: 4px 18px;
+    padding: 8px 10px; margin: 0 -10px;
+    border-radius: 8px;
+    transition: background-color .25s, opacity .25s;
+  }
+  .row.has-cue { background: color-mix(in srgb, var(--cue-bg) 40%, transparent); }
+  .who {
+    font-weight: 700; text-transform: uppercase; letter-spacing: .04em; font-size: .9rem;
+    padding-top: 2px; display: flex; gap: 0 6px; align-items: baseline; flex-wrap: wrap;
+    align-content: flex-start; align-self: start;
+  }
+  .who .mod { font-weight: 400; text-transform: none; color: var(--muted); font-style: italic; letter-spacing: 0; }
+  .dot { width: 8px; height: 8px; border-radius: 50%; flex: none; transform: translateY(-1px); }
+  .txt { min-width: 0; }
+  .dir .txt { font-style: italic; color: var(--muted); }
+  .dir .who { visibility: hidden; }
+  del { text-decoration-thickness: 2px; text-decoration-color: var(--accent); opacity: .55; }
+  .notes { display: flex; flex-direction: column; gap: 0; margin-top: 2px; }
+  .note {
+    font: 600 1.18rem/1.15 "Caveat", "Comic Sans MS", cursive; color: var(--pen);
+  }
+  body.no-notes .notes { display: none; }
+
+  body.focus .row:not(.dir):not(.match) { opacity: .35; }
+  body.focus .row.dir { opacity: .55; }
+  .row.match { background: var(--hl); }
+  .row.flash { animation: flash 1.4s ease; }
+  @keyframes flash { 0%, 40% { background: var(--hl); } 100% { background: transparent; } }
+
+  /* ---------- Cue buttons ---------- */
+  .cues { display: flex; flex-direction: column; gap: 6px; align-items: stretch; }
+  .cue {
+    --p: 0;
+    position: relative; overflow: hidden;
+    display: flex; align-items: center; gap: 8px;
+    font: 700 .8rem/1.2 system-ui, -apple-system, "Segoe UI", sans-serif;
+    color: var(--ink); text-align: left;
+    background: var(--cue-bg); border: 1px solid var(--cue-border);
+    border-radius: 999px; padding: 7px 12px 7px 8px; cursor: pointer;
+    width: 100%;
+  }
+  .cue::before {
+    content: ""; position: absolute; inset: 0;
+    width: calc(var(--p) * 100%); background: var(--cue-fill); opacity: .55;
+    transition: width .1s linear;
+  }
+  .cue > * { position: relative; }
+  .cue.sfx { background: var(--sfx-bg); border-color: var(--sfx-border); }
+  .cue.sfx::before { background: var(--sfx-fill); }
+  .cue .ico {
+    width: 24px; height: 24px; border-radius: 50%; flex: none;
+    display: grid; place-items: center;
+    background: var(--ink); color: var(--paper); font-size: .7rem;
+  }
+  .cue .lbl { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .cue .time { font-variant-numeric: tabular-nums; font-weight: 500; color: var(--muted); font-size: .72rem; }
+  .cue.playing { border-color: var(--accent); }
+  .cue.playing .ico { background: var(--accent); color: var(--accent-ink); }
+  .cue:hover { filter: brightness(.97); }
+  .cue.pending { background: transparent; border-style: dashed; border-color: var(--pending); color: var(--muted); cursor: default; }
+  .cue.pending .ico { background: var(--pending); }
+  .slot { display: flex; flex-direction: column; gap: 4px; }
+  .slot select { font-size: .74rem; padding: 4px 8px; border-radius: 6px; width: 100%; }
+  .slot-title { font: 600 1.05rem/1 "Caveat", cursive; color: var(--pen); padding-left: 4px; }
+
+  /* ---------- Now playing dock ---------- */
+  .dock {
+    position: fixed; left: 50%; bottom: 16px; transform: translateX(-50%);
+    width: min(1008px, calc(100% - 32px)); z-index: 30;
+    background: var(--ink); color: var(--paper);
+    border-radius: 14px; box-shadow: var(--shadow);
+    padding: 10px 12px; display: flex; gap: 10px; align-items: center; flex-wrap: wrap;
+    font: 600 .82rem/1.2 system-ui, -apple-system, "Segoe UI", sans-serif;
+  }
+  .dock .now { flex: 1; min-width: 0; display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+  .dock .idle { opacity: .6; font-weight: 500; }
+  .chip {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: color-mix(in srgb, var(--paper) 14%, transparent);
+    border-radius: 999px; padding: 4px 10px; max-width: 100%;
+  }
+  .chip span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .chip button { all: unset; cursor: pointer; opacity: .7; padding: 0 2px; }
+  .chip button:hover { opacity: 1; }
+  .dock .btn { background: transparent; color: var(--paper); border-color: color-mix(in srgb, var(--paper) 30%, transparent); }
+  .dock .btn.stop { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); font-weight: 700; }
+  .dock input[type=range] { width: 90px; accent-color: var(--accent); }
+  .dock label { display: flex; gap: 6px; align-items: center; opacity: .85; }
+
+  /* ---------- Drawer ---------- */
+  .drawer {
+    position: fixed; top: 0; right: 0; bottom: 0; z-index: 40;
+    width: min(380px, 100%); background: var(--paper); box-shadow: var(--shadow);
+    border-left: 1px solid var(--rule);
+    transform: translateX(100%); transition: transform .25s ease;
+    display: flex; flex-direction: column;
+  }
+  .drawer.open { transform: none; }
+  .drawer header { position: static; display: flex; align-items: center; justify-content: space-between; padding: 14px 16px; background: transparent; }
+  .drawer h2 { font: italic 700 1.1rem "Playfair Display", serif; margin: 0; }
+  .drawer .body { overflow-y: auto; padding: 0 16px 24px; }
+  .drawer h3 { font-size: .74rem; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); margin: 18px 0 8px; }
+  .drawer .lib { display: flex; flex-direction: column; gap: 6px; }
+  .cue-list { list-style: none; margin: 0; padding: 0; }
+  .cue-list li button {
+    all: unset; display: block; width: 100%; cursor: pointer;
+    padding: 8px 10px; border-radius: 8px; font-size: .82rem; line-height: 1.35;
+  }
+  .cue-list li button:hover { background: var(--cue-bg); }
+  .cue-list .pg { color: var(--muted); font-size: .72rem; }
+  .cue-list .nm { font-weight: 700; }
+  .cue-list .tag-pending { color: var(--accent); font-size: .72rem; }
+  .scrim { position: fixed; inset: 0; background: rgb(0 0 0 / .3); z-index: 35; display: none; }
+  .scrim.open { display: block; }
+
+  /* ---------- Responsive ---------- */
+  @media (max-width: 760px) {
+    body { font-size: 16px; }
+    .sheet { padding: 18px 14px 28px; border-radius: 10px; }
+    main { margin-top: 14px; }
+    .row { grid-template-columns: minmax(0, 1fr); gap: 2px; }
+    .dir .who { display: none; }
+    .cues { margin-top: 6px; }
+    .dock input[type=range] { width: 70px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="bar">
+    <h1>Asesinato en la Mansión España<small>Guion con audios · págs. 6–14 y 17</small></h1>
+    <div class="ctrl">
+      <select id="who-filter" aria-label="Resaltar personaje">
+        <option value="">Resaltar personaje…</option>
+      </select>
+      <button class="btn on" id="notes-toggle" aria-pressed="true">Notas a mano</button>
+      <button class="btn" id="open-drawer">Cues y audios</button>
+    </div>
+  </div>
+</header>
+
+<main>
+  <div class="sheet" id="script"></div>
+</main>
+
+<div class="dock" role="region" aria-label="Reproduciendo">
+  <div class="now" id="now"><span class="idle">Nada sonando · Esc detiene todo</span></div>
+  <label>Vol <input type="range" id="vol" min="0" max="1" step="0.05" value="1"></label>
+  <button class="btn stop" id="stop-all">■ Detener todo</button>
+</div>
+
+<div class="scrim" id="scrim"></div>
+<aside class="drawer" id="drawer" aria-label="Cues y audios">
+  <header>
+    <h2>Cues y audios</h2>
+    <button class="btn" id="close-drawer">Cerrar</button>
+  </header>
+  <div class="body">
+    <h3>Cues del guion</h3>
+    <ul class="cue-list" id="cue-list"></ul>
+    <h3>Todos los audios</h3>
+    <div class="lib" id="lib"></div>
+  </div>
+</aside>
+
+<script>
+/* =========================================================
+   AUDIOS — archivos en /canciones
+   kind: "sfx" se superpone; "song" detiene otras canciones.
+   ========================================================= */
+const AUDIO = {
+  chan:     { file: "canciones/chan-chan.mp3",                    name: "Chan chan chaaan",                 kind: "sfx"  },
+  chirrido: { file: "canciones/chirrido-puerta.mp3",              name: "Chirrido de puerta",               kind: "sfx"  },
+  timbre:   { file: "canciones/timbre.mp3",                       name: "Timbre",                           kind: "sfx"  },
+  anos17:   { file: "canciones/17-anos.mp3",                      name: "17 años — Los Ángeles Azules",     kind: "song" },
+  doremi:   { file: "canciones/do-re-mi.mp3",                     name: "Do-Re-Mi",                         kind: "song" },
+  flyme:    { file: "canciones/fly-me-to-the-moon.mp3",           name: "Fly Me to the Moon (instrumental)", kind: "song" },
+  chabon:   { file: "canciones/estoy-saliendo-con-un-chabon.mp3", name: "Estoy saliendo con un chabón — Los Sultanes", kind: "song" },
+  bombon:   { file: "canciones/bombon-asesino.mp3",               name: "Bombón asesino — Los Palmeras",    kind: "song" },
+};
+
+/* =========================================================
+   ESPACIOS SIN AUDIO DEFINIDO
+   El guion marca una canción/intervención pero no hay archivo
+   claro. Se elige desde la página (se guarda en este navegador)
+   o se fija aquí con `audio: "id"`.
+   ========================================================= */
+const SLOTS = {
+  meant:    { label: "Intervención: Meant to Be Yours", audio: null },
+  audition: { label: "Intervención: la audición",       audio: null },
+  musica8:  { label: "Música (pág. 8)",                 audio: null },
+  tomorrow: { label: "Intervención: Tomorrow",          audio: null },
+  mammamia: { label: "Mamma Mía",                       audio: null },
+  rosa:     { label: "Música de La Rosa",               audio: null },
+};
+
+/* =========================================================
+   GUION
+   p: página · w: personaje · m: modificador (en off) · d: acotación
+   x: texto (*cursiva*, ~~tachado~~) · n: notas a mano · c: cues
+   c acepta ids de AUDIO o "slot:<id>"
+   ========================================================= */
+const SCRIPT = [
+  { p: "6" },
+  { w: "Presentador", x: "…Finalmente, ahora podemos permitirnos organizar una presentación como debe de ser, y que, puedo decir, está excepcionalmente bien hecha. Estoy seguro de que nadie olvidará los problemas a los que nos enfrentamos antes de esa presentación. Pero ahora, con nuestro evento principal, ¡estoy seguro de que será nuestro mejor espectáculo hasta ahora! Así que, sin más preámbulos, por favor, junten sus manos para ver la emocionante y misteriosa obra de teatro *Asesinato en la Mansión España*." },
+  { d: "~~Sale alrededor de los planos y las luces del escenario se desvanecen en negro.~~" },
+  { w: "Jonathan", x: "*(Interpretando a Carlos España) entra por la oscuridad. Choca ruidosamente con la carretilla de bebidas.*" },
+  { w: "Jonathan", x: "*(en voz baja)* ~~¡Demonios!~~ ¡Ay!", n: ["Black out", "← Luz completa; luces se prenden y apagan"] },
+  { d: "La luz de repente se acerca a Jonathan. Se congela. Las luces se apagan de nuevo. Él toma su posición, muerto, en el diván, con el brazo extendido en el suelo. Las luces vuelven a encenderse, justo antes de que esté completamente en posición. Roberto (interpretando a Tomás Calvet) y Darío (interpretando a Pérez el mayordomo) puede escucharse cuando se acerca a la puerta." },
+  { w: "Roberto", m: "en off", x: "¡Carlos! ¿Estás listo? ¡Todos estamos esperando abajo para brindar por tu compromiso! ¿Carlos?" },
+  { d: "Llama a la puerta." },
+  { w: "Roberto", m: "en off", x: "Ven ahora, Carlos, has estado ahí por horas. ¡Si no lo supiera mejor, seguro estás teniendo dudas sobre casarte o no el día de tu boda! *(Risita).* Enfréntalo ya Carlos, si no sales, ¡entraré! *(Trata de abrir la puerta)* ¡Maldita sea! ¡Ha cerrado la puerta! ¡Dame esas llaves, Pérez!" },
+  { w: "Darío", m: "en off", x: "¡Aquí están, señor Calvet!" },
+  { w: "Roberto", m: "en off", x: "Gracias, Pérez. Vamos a abrir esta puerta. ¡Estamos entrando Carlos! ¡Estamos entrando!" },
+  { d: "Él va a abrir la puerta, pero no se moverá." },
+  { w: "Roberto", m: "en off", x: "Por fin entramos." },
+  { d: "Roberto y Darío dan la vuelta alrededor del set para entrar.", n: ["* SFX: chirrido de puerta"], c: ["chirrido"] },
+
+  { p: "7" },
+  { w: "Roberto", x: "Pero ¿qué es esto? Carlos ¿inconsciente?" },
+  { w: "Darío", x: "Dormido seguramente, señor Calvet." },
+  { w: "Roberto", x: "~~Maldita sea~~ Recórcholis, Pérez, eso espero." },
+  { w: "Darío", x: "¡Tomaré su pulso!" },
+  { w: "Roberto", x: "¡~~Maldita sea~~! Sabía que algo estaba mal, ¡es tan extraño que Carlos desapareciera así!" },
+  { w: "Darío", x: "¡Señor! ¡Está muerto!", n: ["* chan", "← Luces rojas"], c: ["chan"] },
+  { d: "Las luces se encienden en rojo. Música dramática. Las luces vuelven a su estado general.", n: ["← Luz normal"] },
+  { w: "Roberto", x: "¿Muerto? ¡Maldita sea Pérez, no puede ser! Es mi mejor amigo." },
+  { w: "Darío", x: "¡No está respirando, señor, su corazón no late!" },
+  { w: "Roberto", x: "¡Estoy estupefacto! Él estaba bien hace una hora.", n: ["* chan"], c: ["chan"] },
+  { d: "Cruza frente al diván, pisando la mano extendida de Jonathan." },
+  { w: "Darío", x: "No entiendo, esto es un engaño. Él no puede estar muerto. No tiene sentido." },
+  { w: "Roberto", x: "Por supuesto, sí tiene sentido. ¡Ha sido asesinado!", n: ["← Luces rojas ← suena 17 años"], c: ["anos17"] },
+  { d: "Las luces cambian a rojo otra vez. Una vergonzosa entrada musical dramática. Las luces vuelven a cambiar al estado general.", n: ["← Luz normal, sound effect normal"] },
+  { w: "Roberto", x: "Dios mío, ¿dónde está Florencia?" },
+  { w: "Darío", x: "Está en el comedor, señor, ¿debo ir a buscarla?" },
+  { w: "Roberto", x: "¡Todavía no! Lo último que necesitamos es que ella se ponga histérica como siempre." },
+  { w: "Darío", x: "Sí, señor. ¿Cree que fue asesinado el Sr. Colvet? ¿O cree que quizás fue un suicidio?" },
+  { w: "Roberto", x: "¡¿Suicidio Carlos?! ‖ ¡Imposible! ¡Nunca hubo un hombre con más entusiasmo por la vida que Carlos! Era joven, rico y pronto se casaría, ¿por qué demonios se suicidaría?",
+    n: ["Intervención (~~Memories?~~) “Meant to Be Yours” — entra en ‖"], c: ["slot:meant"] },
+  { d: "Intervención anotada a mano al final de la página.",
+    n: ["* Caminan en loop [?] y hacen gestos [?]", "— I'm going to an audition", "— You what now?", "* I'm here for the audition"], c: ["slot:audition"] },
+
+  { p: "8" },
+  { w: "Darío", x: "Pero ¿por qué demonios alguien querría asesinarlo, señor? Carlos era un hombre tan bueno. Generoso, amable, verdadero… *(lee la palabra de su mano y la pronuncia mal)* fi-lán-tro-po. Nunca tuvo un enemigo en su vida." },
+  { w: "Roberto", x: "Hasta hoy parece. ¡Maldita sea, Pérez! ¡Carlos España fue asesinado a sangre fría en esta misma habitación este mismo día, en esta misma habitación! *(se da cuenta de su error)*" },
+  { w: "Darío", x: "¿Llamo a la policía, señor Colvet?" },
+  { w: "Roberto", x: "¿La policía? Ellos no podrían llegar aquí durante días con esta tormenta de nieve. *(Abre las cortinas para ver y revelar cómo caen los copos de nieve de papel. Cierra las cortinas nuevamente.)* Llamaré al Inspector Cardeña, él vive justo al otro lado de la aldea. *(Recoge el auricular)* Estará aquí en muy poco tiempo. Dame el auricular, Pérez.", n: ["(copos de nieve) Post-its o [ilegible]"] },
+  { d: "Se da cuenta de que ya tiene el auricular." },
+  { w: "Roberto", x: "Gracias, Pérez." },
+  { d: "Darío se sienta en la pierna de Jonathan." },
+  { w: "Roberto", x: "Buenas tardes. ¡Páseme al inspector Cardeña!… ¡Sé que es tarde! Maldita sea, no me importa cómo está el clima. ¡Ha habido un asesinato! ¡Alguien ha asesinado a Carlos España!",
+    n: ["+ música", "* chan (x3)", "← Luces rojas; luces se apagan y encienden"], c: ["chan", "slot:musica8"] },
+  { d: "Las luces cambian a azul. Una entrada musical dramática mucho más larga. Las luces vuelven a cambiar al estado general." },
+  { w: "Roberto", x: "¡Eso es correcto! ¡Gracias! *(Cuelga.)* Está en camino." },
+  { w: "Darío", x: "¿Inspector Cardeña?" },
+  { w: "Roberto", x: "Dicen que es el mejor inspector del distrito, resolverá este caso y rápido." },
+  { w: "Darío", x: "Muy bien, señor, ¿y qué debo hacer?" },
+  { w: "Roberto", x: "¡Bloquea cada puerta, hombre!" },
+  { d: "Él cruza el escenario de nuevo. Jonathan saca bruscamente su mano del camino de Roberto. Jonathan coloca nuevamente su mano. Darío lo pisa." },
+
+  { p: "9" },
+  { w: "Roberto", x: "¡Ni un alma sale de la Mansión España hasta que se encuentre al asesino!" },
+  { w: "Darío", x: "De inmediato, señor." },
+  { w: "Roberto", x: "… y reúne a todos aquí." },
+  { w: "Darío", x: "¡De inmediato, señor!" },
+  { d: "Va a salir por la puerta, pero todavía no se abre. Él sale alrededor del plano de la escenografía." },
+  { w: "Roberto", x: "¡Dios mío! ¡Apenas es una hora antes de la fiesta de compromiso y ya ha habido un asesinato! *(Gira bruscamente hacia la puerta.)* ¡Florencia!" },
+  { d: "Sandra intenta pasar por la puerta." },
+  { w: "Sandra", m: "en off", x: "¡Carlos!" },
+  { w: "Roberto", x: "¡Sal Florencia! No puedes estar aquí." },
+  { w: "Sandra", m: "en off", x: "¡No! No puedo creer lo que estoy viendo." },
+  { d: "Ella no puede entrar por la puerta, así que asoma la cabeza por las pestañas al costado del escenario." },
+  { w: "Sandra", x: "Dios mío, se ve tan frágil tirado allí." },
+  { w: "Roberto", x: "Lo siento Florencia, es un shock para todos nosotros." },
+  { w: "Sandra", x: "Su piel es fría al tacto." },
+  { w: "Roberto", x: "¡No, no le toques Florencia!" },
+  { w: "Sandra", x: "¡Yo debo!" },
+  { w: "Roberto", x: "¡No debes!" },
+  { w: "Sandra", x: "¡Suelta mi mano!" },
+  { d: "Él pretende soltarle la mano." },
+  { w: "Sandra", x: "¡Oh Carlos! ¡Un último abrazo!" },
+  { w: "Roberto", x: "¡No puedo soportar ver a mi hermana con tanto dolor!" },
+  { w: "Sandra", x: "¿Quién podría hacer una cosa así? ¡La noche de nuestra fiesta de compromiso! ¡Cecilio! ¡Rápido! ¡Tu hermano está muerto!", n: ["← Efecto chan chan"], c: ["chan"] },
+
+  { p: "10" },
+  { w: "Darío", m: "en off", x: "¡De esta manera, señor España!" },
+  { w: "Max", m: "en off", x: "Ya voy, señorita Colvet." },
+  { d: "Darío entra herido por un lado de la escenografía. Max entra sin dificultad por la puerta." },
+  { w: "Max", x: "¿Hermano? ¡Muerto! ¡No puede ser!" },
+  { w: "Roberto", x: "Tranquilízate Cecilio. Viértele una bebida fuerte, Pérez." },
+  { w: "Darío", x: "¡Enseguida señor!" },
+  { d: "Él trae una botella de whisky.", n: ["← ¿Fanta Uva?"] },
+  { w: "Darío", x: "¡Dios mío! ¡Se ha bebido toda la botella señor! ¡Ya no queda una gota!" },
+  { d: "Darío trata de deshacerse de todo el whisky y lo tira silenciosamente en el carbón." },
+  { w: "Darío", x: "¡No queda ni una gota!" },
+  { w: "Roberto", x: "¡Espera! ¡Hay otro en el estante!" },
+  { w: "Darío", x: "¡Por supuesto, señor! ¡Sí, este está lleno!" },
+  { d: "Él saca la botella vacía que debería haber traído la primera vez." },
+  { w: "Roberto", x: "¡Esto es horrible! ¿~~Me refiero a~~ quién en la tierra ~~tendría una motivación~~ para asesinar a Carlos ~~España~~?" },
+  { d: "Darío puso la botella vacía en una bandeja junto con cuatro vasos y pasa por la ventana. Al pasar por la ventana, Ana se inclina por la ventana y cambia la botella vacía por una botella plástica llena de thinner con un gran símbolo inflamable. Darío no ve el interruptor, pero luego ve la botella nueva y se desconcierta por esto." },
+  { w: "Sandra", x: "¡No ~~me lo puedo~~ imaginar!" },
+  { d: "Darío le da un vaso a Max." },
+  { w: "Max", x: "~~Gracias, Pérez.~~" },
+  { d: "Darío sirve el whisky en el vaso de Max." },
+  { w: "Roberto", x: "¡Es impensable! Aquí mismo, en sus mismas habitaciones privadas en la Mansión España." },
+
+  { p: "11" },
+  { w: "Sandra", x: "¡Es terrible! ¡Apenas una semana después de nuestro compromiso!" },
+  { w: "Max", x: "Era un buen hermano." },
+  { d: "Toma el thinner. Repentinamente lo escupe de vuelta." },
+  { w: "Max", x: "¡Es el mejor ~~whisky~~ Fanta que he probado!", n: ["← Darío: Es una versión especial."] },
+  { w: "Roberto", x: "~~Ten otra, para calmar tus nervios.~~" },
+  { w: "Max", x: "~~¡Hazlo doble!~~" },
+  { d: "Darío vierte otro vaso de thinner. Max lo bebe otra vez. Es horrible otra vez." },
+  { w: "Sandra", x: "¡Oh mi Carlos, mi Carlos! ¡Mi cabeza da vueltas! ¡Me voy a poner histérica!" },
+  { w: "Roberto", x: "Cálmate, Florencia," },
+  { w: "Darío", x: "~~¿Otro whisky, señor?~~" },
+  { w: "Max", x: "~~¡Sí!~~" },
+  { w: "Sandra", x: "No puedo creer que Carlos estuviera sentado aquí solo bebiendo, cuando se suponía que él debía estar abajo con nosotros." },
+  { w: "Max", x: "Mi hermano no estaba tan feliz como él le hizo creer a la gente. Debajo de esa máscara de alegría había un lado más oscuro del hombre que muchos no sabían." },
+  { w: "Darío", x: "Es cierto, su sonrisa era a menudo simplemente una *(lee de sus manos)* fachada. Tuve la suerte de ser una de las únicas personas en las que realmente confió. Hoy he perdido a un verdadero amigo." },
+  { w: "Roberto", x: "Todos lo hemos hecho, Pérez. Ya para, conocía a Carlos desde la escuela." },
+  { w: "Sandra", x: "No sé cómo me voy a recuperar de esto." },
+  { w: "Roberto", x: "Volverás a casa conmigo. Soy tu hermano y no será de otra forma." },
+  { w: "Max", x: "Pérez tiene razón, mi hermano estaba escondiendo un profundo sentimiento de melancolía y resentimiento. No hay dudas en mi cabeza, fue suicidio.", n: ["* chan chan"], c: ["chan"] },
+
+  { p: "12" },
+  { w: "Roberto", x: "¿Suicidio Cecilio? ¡Cómo puedes decir eso! Por supuesto no; ¡es un asesinato! ¡Asesinato en primer grado!", n: ["* chan chan"], c: ["chan"] },
+  { w: "Max", x: "Tonterías, el hombre estaba paranoico, ¡celoso y puedo probarlo! ¡Pérez, dame su diario, está en la repisa de la chimenea!", n: ["PAUSA * “Repisa”… no hay repisa, repito."] },
+  { d: "La mano de Ana salta a través de las cortinas poniendo un diario a la vista. Darío se lo pasa a Max." },
+  { w: "Max", x: "Por qué, mira la última página. *(Sin mirar el diario)* “Me temo que Florencia no me quiere. La noche de nuestra fiesta de compromiso; la desesperación envuelve mi alma.”" },
+  { w: "Sandra", x: "¡Pero yo amo a Carlos con todo mi corazón!" },
+  { d: "Max devuelve el diario a la repisa de la chimenea; cae directamente al suelo." },
+  { w: "Max", x: "¡Como dije! Enloquecido por la paranoia y los celos." },
+  { d: "Todos jadean y de repente se enfrentan. Silencio. El elenco espera un efecto de sonido que no sucede. Finalmente, un timbre ruidoso suena tarde.",
+    n: ["Intervención: Tomorrow / Mamma Mía", "← Luces rojas (no música de suspenso)", "* Timbre (tarde)"], c: ["slot:tomorrow", "slot:mammamia", "timbre"] },
+  { w: "Todos", x: "*(Reaccionan)* ¡El inspector!" },
+  { w: "Sandra", x: "¡Gracias a Dios que está aquí!" },
+  { d: "Cristóbal (interpretando al inspector Cardeña) entra por la puerta, cubierto de copos de nieve de papel, con un maletín." },
+  { w: "Cristóbal", x: "Qué terrible tormenta de nieve. Buenas noches, soy el inspector Cardeña. Tome mi maletín." },
+  { w: "Darío", x: "Sí, inspector." },
+  { d: "Cristóbal le entrega su maletín a Darío, quien lo coloca en el suelo junto a la mesa." },
+  { w: "Cristóbal", x: "¡Este debe ser Carlos España! Lo siento; esto debe haber dejado a todos en un maldito shock." },
+  { w: "Sandra", x: "*(Sonriendo)* ¡Lo hizo, todos seguimos tambaleándonos!" },
+
+  { p: "13" },
+  { w: "Cristóbal", x: "Naturalmente. ¿Alguno de ustedes es la familia inmediata del difunto?" },
+  { w: "Max", x: "Soy Cecilio España. Soy su hermano." },
+  { w: "Sandra", x: "Soy Florencia Colvet. Soy su prometida. Esta noche era nuestra fiesta de compromiso." },
+  { w: "Cristóbal", x: "Maldición, qué triste. ¡Tú! ¿Le has servido a todos unos tragos fuertes?" },
+  { w: "Darío", x: "Sí, inspector." },
+  { d: "Sostiene la bandeja y todos toman un vaso. Darío quita la bandeja, golpeando a Jonathan en la cabeza." },
+  { w: "Max", x: "Levantemos un vaso: al hombre que todos amamos. ¡A Carlos!" },
+  { w: "Todos", x: "¡Carlos!" },
+  { d: "Todos beben el thinner. Los otros se atragantan, lo escupen y se recuperan." },
+  { w: "Cristóbal", x: "Delicioso." },
+  { w: "Sandra", x: "Excelente." },
+  { w: "Roberto", x: "Encantador." },
+  { w: "Cristóbal", x: "Escucha, todos ustedes deben estar angustiados, pero perdónenme, cuanto antes pueda hacer mis preguntas, más antes podremos llegar al fondo de este asunto espantoso." },
+  { d: "Pone el cuaderno del inspector sobre la mesa." },
+  { w: "Cristóbal", x: "*(A Darío)* Si fueras tan amable de bajar el cuerpo, entonces puedo examinarlo." },
+  { w: "Darío", x: "Sí, inspector." },
+  { w: "Roberto", x: "Te echaré una mano, Perkins." },
+  { w: "Cristóbal", x: "Entonces cierra todas las puertas de la casa y prepara esta habitación. Voy a llevar a cabo mis consultas aquí después de todo." },
+  { w: "Darío", x: "Inspector." },
+  { d: "En las siguientes líneas Darío trae una camilla. Roberto y Darío intentan levantar a Jonathan en la camilla, pero no pueden. Lo tiran del diván al suelo. Luego van a levantar la camilla; la lona se desprende de la camilla y Roberto y Darío se quedan sosteniendo solo los palos. Confundidos sobre qué hacer, cargan solo los palos a través de la puerta." },
+
+  { p: "14" },
+  { w: "Max", x: "¿Alguna idea sobre la causa de la muerte, inspector?" },
+  { w: "Cristóbal", x: "Podría ser una serie de cosas. Asfixia, estrangulamiento, veneno. Antes de examinar completamente el cuerpo, no me gustaría decirlo." },
+  { w: "Sandra", x: "¿Cómo podría alguien hacerlo?" },
+  { w: "Cristóbal", x: "Trata de no pensar en ello, Colvet. Una vez que haya terminado, bajaré y te hablaré individualmente y quizás puedas conseguir algo de espacio; para calmar tus nervios." },
+  { w: "Sandra", x: "Gracias inspector, esto es todo lo que puedo hacer." },
+  { w: "Cristóbal", x: "Regresaré pronto, tan pronto como termine de examinar el cuerpo." },
+  { d: "Él sale, cerrando la puerta detrás de él. Jonathan se ha dado cuenta de que tiene que ser llevado y poco a poco comienza a levantarse, tratando de no ser visto, y se dirige hacia la puerta, arrastrando la lona de la camilla con él. Sandra y Max miran fijamente a Jonathan mientras él sale lentamente por la puerta y la cierra detrás de él, atrapando la lona de la camilla en la puerta. Jonathan tira de la lona de la camilla a través de la grieta de la puerta; la última parte se atasca; él tira de ella, haciendo que la puerta se abra, revelando que Sandra está cerrando la puerta." },
+  { w: "Max", x: "¡Gracias a Dios que se han ido todos!" },
+  { w: "Sandra", x: "¡No digas una palabra! ¡Si se enteran de nosotros, seremos sospechosos!" },
+  { w: "Max", x: "Tú y yo estábamos teniendo una aventura, ¿qué hay de eso? No significa que lo hayamos matado." },
+  { w: "Sandra", x: "¡Por supuesto que no! ¡Pero eso es lo que pensará el inspector!" },
+  { w: "Max", x: "Está bien, seguiremos como si todo se quede como estaba." },
+  { d: "Se sienta en el diván y descubre un libro de contabilidad debajo de los cojines. En la confusión lo mueve bajo el diván.", n: ["★"] },
+  { w: "Max", x: "Excepto que ahora no te verás obligado a casarte con mi hermano bestial." },
+
+  { missing: "Páginas 15 y 16 — no están en el escaneo." },
+
+  { p: "17" },
+  { w: "Max", x: "Gracias Pérez. Ponlos en la repisa de la chimenea." },
+  { d: "Darío camina hacia la repisa con candelabros. Él va a ponerlos y Ana mira a través de la ventana y sostiene la repisa de la chimenea en su posición. Darío sale y Ana permanece en los otros." },
+  { w: "Max", x: "Por fin estamos solos." },
+  { d: "Ana mira torpemente desde la ventana." },
+  { w: "Sandra", x: "¡Oh Cecilio! ¡Huyamos de aquí! ¡Muy lejos! ¡Juntos!" },
+  { w: "Max", x: "Pronto, mi amor, pero hay que tener cuidado. No debemos despertar sospechas." },
+  { w: "Sandra", x: "¡Cecilio, dime quién crees que mató a Carlos!" },
+  { w: "Max", x: "No hay duda en mí, Florencia, ¡fue asesinado por tu hermano, Tomás Colvet!", n: ["← Música de La Rosa"], c: ["slot:rosa"] },
+  { w: "Sandra", x: "Mi hermano… ¡Qué situación tan diabólica es esta!" },
+  { d: "Jonathan de repente irrumpe a través de la puerta con una pistola." },
+  { w: "Jonathan", x: "¡No tan rápido, inspector!" },
+  { d: "Max y Sandra miran fijamente a Jonathan, quien se da cuenta de que ha llegado demasiado pronto." },
+  { w: "Sandra", x: "¿Pero por qué Tomás querría a Carlos muerto?" },
+  { w: "Max", x: "¿No es obvio? ¡Él siempre ha sido un amargado y posesivo cuando se trata de ti! No le gustaba la idea de que un mejor amigo se casara con su hermana. Los vio juntos en la fiesta de compromiso de esta noche y eso lo enojó, ¡y él mató a Carlos!" },
+  { w: "Sandra", x: "Pero si este es Tomás, ¿y si se entera de ti y de mí?" },
+  { w: "Max", x: "No creo que haya ninguna duda. ¡Él intentaría matarnos, tal como mató a Carlos!" },
+  { w: "Sandra", x: "¡Oh! ¡Me desmayo otra vez!" },
+  { w: "Max", x: "¡No te preocupes Florencia! Sólo sigue mi ejemplo…", n: ["★"] },
+  { missing: "Fin del escaneo." },
+];
+
+const CAST = {
+  "Presentador": { role: "", color: "#8a8172" },
+  "Jonathan":    { role: "Carlos España", color: "#7c3aed" },
+  "Roberto":     { role: "Tomás Colvet", color: "#c2410c" },
+  "Darío":       { role: "Pérez, el mayordomo", color: "#0f766e" },
+  "Sandra":      { role: "Florencia Colvet", color: "#be185d" },
+  "Max":         { role: "Cecilio España", color: "#1d4ed8" },
+  "Cristóbal":   { role: "Inspector Cardeña", color: "#4d7c0f" },
+  "Todos":       { role: "", color: "#8a8172" },
+};
+
+/* ================= Persistencia (solo este navegador) ================= */
+const STORE_KEY = "mansion-espana-slots";
+let slotChoice = {};
+try { slotChoice = JSON.parse(localStorage.getItem(STORE_KEY) || "{}") || {}; } catch (e) { slotChoice = {}; }
+function saveSlots() { try { localStorage.setItem(STORE_KEY, JSON.stringify(slotChoice)); } catch (e) {} }
+function slotAudio(id) { return slotChoice[id] !== undefined ? slotChoice[id] : SLOTS[id].audio; }
+
+/* ================= Render ================= */
+const esc = s => s.replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+const fmt = s => esc(s).replace(/~~(.+?)~~/g, "<del>$1</del>").replace(/\*(.+?)\*/g, "<em>$1</em>");
+
+const $script = document.getElementById("script");
+const cueIndex = [];
+let page = "";
+
+function audioOptions(selected) {
+  let o = `<option value="">— Elegir audio —</option>`;
+  for (const [id, a] of Object.entries(AUDIO)) {
+    o += `<option value="${id}"${id === selected ? " selected" : ""}>${esc(a.name)}</option>`;
+  }
+  return o;
+}
+
+function cueButton(audioId, label) {
+  const a = AUDIO[audioId];
+  return `<button class="cue ${a.kind === "sfx" ? "sfx" : ""}" data-audio="${audioId}">
+    <span class="ico">▶</span><span class="lbl">${esc(label || a.name)}</span><span class="time"></span></button>`;
+}
+
+function slotBlock(slotId) {
+  const s = SLOTS[slotId];
+  return `<div class="slot" data-slot="${slotId}">
+    <div class="slot-title">${esc(s.label)}</div>
+    <div class="slot-btn"></div>
+    <select data-slot="${slotId}" aria-label="Audio para ${esc(s.label)}">${audioOptions(slotAudio(slotId))}</select>
+  </div>`;
+}
+
+function renderSlot(slotId) {
+  document.querySelectorAll(`.slot[data-slot="${slotId}"] .slot-btn`).forEach(el => {
+    const id = slotAudio(slotId);
+    el.innerHTML = id && AUDIO[id]
+      ? cueButton(id)
+      : `<button class="cue pending" disabled><span class="ico">♪</span><span class="lbl">Sin audio asignado</span></button>`;
+  });
+  updateCueList();
+}
+
+let html = "";
+SCRIPT.forEach((item, i) => {
+  if (item.p) { page = item.p; html += `<div class="page-mark" id="pag-${item.p}">Página ${item.p}</div>`; return; }
+  if (item.missing) { html += `<div class="page-mark"></div><div class="missing">${esc(item.missing)}</div>`; return; }
+
+  const isDir = !!item.d;
+  const cues = item.c || [];
+  const notes = (item.n || []).map(n => `<span class="note">✍️ ${fmt(n)}</span>`).join("");
+  const cast = item.w ? CAST[item.w] || { color: "#8a8172" } : null;
+  const who = isDir ? "" :
+    `<span class="dot" style="background:${cast.color}"></span>${esc(item.w)}${item.m ? ` <span class="mod">(${esc(item.m)})</span>` : ""}`;
+  const cueHtml = cues.map(c => c.startsWith("slot:") ? slotBlock(c.slice(5)) : cueButton(c)).join("");
+
+  cues.forEach(c => cueIndex.push({ row: i, page, cue: c, snippet: (item.x || item.d).replace(/~~|\*/g, "").slice(0, 70) }));
+
+  html += `<div class="row ${isDir ? "dir" : "line"}${cues.length ? " has-cue" : ""}" id="r${i}" data-who="${esc(item.w || "")}">
+    <div class="who">${who}</div>
+    <div class="txt">${fmt(item.x || item.d)}${notes ? `<div class="notes">${notes}</div>` : ""}</div>
+    <div class="cues">${cueHtml}</div>
+  </div>`;
+});
+$script.innerHTML = html;
+Object.keys(SLOTS).forEach(renderSlot);
+
+/* ================= Drawer: lista de cues + biblioteca ================= */
+function cueName(c) {
+  if (!c.startsWith("slot:")) return { name: AUDIO[c].name, pending: false };
+  const id = c.slice(5), a = slotAudio(id);
+  return { name: SLOTS[id].label + (a ? ` → ${AUDIO[a].name}` : ""), pending: !a };
+}
+function updateCueList() {
+  const ul = document.getElementById("cue-list");
+  if (!ul) return;
+  ul.innerHTML = cueIndex.map(c => {
+    const { name, pending } = cueName(c.cue);
+    return `<li><button data-jump="r${c.row}">
+      <span class="pg">Pág. ${c.page}</span> · <span class="nm">${esc(name)}</span>
+      ${pending ? `<span class="tag-pending"> · sin audio</span>` : ""}
+      <br><span class="pg">${esc(c.snippet)}…</span></button></li>`;
+  }).join("");
+}
+updateCueList();
+document.getElementById("lib").innerHTML = Object.keys(AUDIO).map(id => cueButton(id)).join("");
+
+const drawer = document.getElementById("drawer"), scrim = document.getElementById("scrim");
+function toggleDrawer(open) { drawer.classList.toggle("open", open); scrim.classList.toggle("open", open); }
+document.getElementById("open-drawer").onclick = () => toggleDrawer(true);
+document.getElementById("close-drawer").onclick = () => toggleDrawer(false);
+scrim.onclick = () => toggleDrawer(false);
+document.getElementById("cue-list").addEventListener("click", e => {
+  const b = e.target.closest("[data-jump]"); if (!b) return;
+  toggleDrawer(false);
+  const row = document.getElementById(b.dataset.jump);
+  row.scrollIntoView({ block: "center" });
+  row.classList.remove("flash"); void row.offsetWidth; row.classList.add("flash");
+});
+
+/* ================= Filtros ================= */
+const whoSel = document.getElementById("who-filter");
+Object.entries(CAST).filter(([n]) => n !== "Todos" && n !== "Presentador").forEach(([n, c]) => {
+  whoSel.insertAdjacentHTML("beforeend", `<option value="${n}">${n} — ${c.role}</option>`);
+});
+whoSel.onchange = () => {
+  const v = whoSel.value;
+  document.body.classList.toggle("focus", !!v);
+  document.querySelectorAll(".row.line").forEach(r => r.classList.toggle("match", !!v && (r.dataset.who === v || r.dataset.who === "Todos")));
+};
+const notesBtn = document.getElementById("notes-toggle");
+notesBtn.onclick = () => {
+  const on = !notesBtn.classList.contains("on");
+  notesBtn.classList.toggle("on", on); notesBtn.setAttribute("aria-pressed", on);
+  document.body.classList.toggle("no-notes", !on);
+};
+
+/* ================= Audio ================= */
+const players = {};      // id -> HTMLAudioElement
+let volume = 1;
+
+function player(id) {
+  if (!players[id]) {
+    const a = new Audio(AUDIO[id].file);
+    a.preload = AUDIO[id].kind === "sfx" ? "auto" : "metadata";
+    a.volume = volume;
+    a.addEventListener("ended", () => { a.currentTime = 0; refresh(); });
+    a.addEventListener("error", () => alert(`No se pudo cargar: ${AUDIO[id].file}`));
+    players[id] = a;
+  }
+  return players[id];
+}
+function isPlaying(id) { const a = players[id]; return a && !a.paused; }
+function stop(id) { const a = players[id]; if (a) { a.pause(); a.currentTime = 0; } }
+function stopAll() { Object.keys(players).forEach(stop); refresh(); }
+
+function toggle(id) {
+  if (isPlaying(id)) { stop(id); refresh(); return; }
+  if (AUDIO[id].kind === "song") {
+    Object.keys(players).forEach(o => { if (o !== id && AUDIO[o].kind === "song") stop(o); });
+  }
+  const a = player(id);
+  a.currentTime = 0;
+  a.play().catch(() => {});
+  refresh();
+  tick();
+}
+
+const mmss = t => isFinite(t) ? `${Math.floor(t / 60)}:${String(Math.floor(t % 60)).padStart(2, "0")}` : "";
+
+function refresh() {
+  document.querySelectorAll(".cue[data-audio]").forEach(btn => {
+    const id = btn.dataset.audio, a = players[id], on = isPlaying(id);
+    btn.classList.toggle("playing", !!on);
+    btn.querySelector(".ico").textContent = on ? "■" : "▶";
+    btn.style.setProperty("--p", on && a.duration ? a.currentTime / a.duration : 0);
+    btn.querySelector(".time").textContent = on && a.duration ? "-" + mmss(a.duration - a.currentTime) : "";
+  });
+  const playing = Object.keys(players).filter(isPlaying);
+  document.getElementById("now").innerHTML = playing.length
+    ? playing.map(id => `<span class="chip">♪ <span>${esc(AUDIO[id].name)}</span>
+        <span>${mmss(players[id].currentTime)}</span><button data-stop="${id}" aria-label="Detener">✕</button></span>`).join("")
+    : `<span class="idle">Nada sonando · Esc detiene todo</span>`;
+  return playing.length;
+}
+let raf = 0;
+function tick() { cancelAnimationFrame(raf); if (refresh()) raf = requestAnimationFrame(tick); }
+
+document.addEventListener("click", e => {
+  const btn = e.target.closest(".cue[data-audio]");
+  if (btn) { toggle(btn.dataset.audio); return; }
+  const s = e.target.closest("[data-stop]");
+  if (s) { stop(s.dataset.stop); refresh(); }
+});
+document.addEventListener("change", e => {
+  const sel = e.target.closest("select[data-slot]");
+  if (!sel) return;
+  slotChoice[sel.dataset.slot] = sel.value || null;
+  saveSlots();
+  renderSlot(sel.dataset.slot);
+  refresh();
+});
+document.getElementById("stop-all").onclick = stopAll;
+document.addEventListener("keydown", e => { if (e.key === "Escape") { stopAll(); toggleDrawer(false); } });
+document.getElementById("vol").oninput = e => {
+  volume = +e.target.value;
+  Object.values(players).forEach(a => a.volume = volume);
+};
+</script>
+</body>
+</html>
