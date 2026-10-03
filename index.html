@@ -167,7 +167,7 @@
     font: 700 .8rem/1.2 system-ui, -apple-system, "Segoe UI", sans-serif;
     color: var(--ink); text-align: left;
     background: var(--cue-bg); border: 1px solid var(--cue-border);
-    border-radius: 999px; padding: 7px 12px 7px 8px; cursor: pointer;
+    border-radius: 18px; padding: 7px 12px 7px 8px; cursor: pointer;
     width: 100%;
   }
   .cue::before {
@@ -183,7 +183,7 @@
     display: grid; place-items: center;
     background: var(--ink); color: var(--paper); font-size: .7rem;
   }
-  .cue .lbl { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .cue .lbl { flex: 1; min-width: 0; overflow-wrap: anywhere; }
   .cue .time { font-variant-numeric: tabular-nums; font-weight: 500; color: var(--muted); font-size: .72rem; }
   .cue.playing { border-color: var(--accent); }
   .cue.playing .ico { background: var(--accent); color: var(--accent-ink); }
@@ -309,6 +309,7 @@ const AUDIO = {
   flyme:    { file: "canciones/fly-me-to-the-moon.mp3",           name: "Fly Me to the Moon (instrumental)", kind: "song" },
   chabon:   { file: "canciones/estoy-saliendo-con-un-chabon.mp3", name: "Estoy saliendo con un chabón — Los Sultanes", kind: "song" },
   bombon:   { file: "canciones/bombon-asesino.mp3",               name: "Bombón asesino — Los Palmeras",    kind: "song" },
+  rosa:     { file: "canciones/rosa-de-guadalupe.mp3",            name: "La Rosa de Guadalupe",             kind: "song" },
 };
 
 /* =========================================================
@@ -323,7 +324,7 @@ const SLOTS = {
   musica8:  { label: "Música (pág. 8)",                 audio: null },
   tomorrow: { label: "Intervención: Tomorrow",          audio: null },
   mammamia: { label: "Mamma Mía",                       audio: null },
-  rosa:     { label: "Música de La Rosa",               audio: null },
+  rosa:     { label: "Música de La Rosa",               audio: "rosa" },
 };
 
 /* =========================================================
@@ -334,7 +335,8 @@ const SLOTS = {
    ========================================================= */
 const SCRIPT = [
   { p: "6" },
-  { w: "Presentador", x: "…Finalmente, ahora podemos permitirnos organizar una presentación como debe de ser, y que, puedo decir, está excepcionalmente bien hecha. Estoy seguro de que nadie olvidará los problemas a los que nos enfrentamos antes de esa presentación. Pero ahora, con nuestro evento principal, ¡estoy seguro de que será nuestro mejor espectáculo hasta ahora! Así que, sin más preámbulos, por favor, junten sus manos para ver la emocionante y misteriosa obra de teatro *Asesinato en la Mansión España*." },
+  { w: "Presentador", x: "…Finalmente, ahora podemos permitirnos organizar una presentación como debe de ser, y que, puedo decir, está excepcionalmente bien hecha. Estoy seguro de que nadie olvidará los problemas a los que nos enfrentamos antes de esa presentación. Pero ahora, con nuestro evento principal, ¡estoy seguro de que será nuestro mejor espectáculo hasta ahora! Así que, sin más preámbulos, por favor, junten sus manos para ver la emocionante y misteriosa obra de teatro *Asesinato en la Mansión España*.",
+    c: ["flyme", "chabon", "bombon", "doremi"] },
   { d: "~~Sale alrededor de los planos y las luces del escenario se desvanecen en negro.~~" },
   { w: "Jonathan", x: "*(Interpretando a Carlos España) entra por la oscuridad. Choca ruidosamente con la carretilla de bebidas.*" },
   { w: "Jonathan", x: "*(en voz baja)* ~~¡Demonios!~~ ¡Ay!", n: ["Black out", "← Luz completa; luces se prenden y apagan"] },
@@ -553,7 +555,7 @@ const STORE_KEY = "mansion-espana-slots";
 let slotChoice = {};
 try { slotChoice = JSON.parse(localStorage.getItem(STORE_KEY) || "{}") || {}; } catch (e) { slotChoice = {}; }
 function saveSlots() { try { localStorage.setItem(STORE_KEY, JSON.stringify(slotChoice)); } catch (e) {} }
-function slotAudio(id) { return slotChoice[id] !== undefined ? slotChoice[id] : SLOTS[id].audio; }
+function slotAudio(id) { const a = slotChoice[id] || SLOTS[id].audio; return AUDIO[a] ? a : null; }
 
 /* ================= Render ================= */
 const esc = s => s.replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
