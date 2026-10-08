@@ -40,7 +40,7 @@ Guion completo de la obra (páginas 6 a 38) con las anotaciones a mano del direc
 | `disparos.mp3` | Disparos en la biblioteca, pág. 29 |
 | `17-anos.mp3` | Entrada musical, pág. 7 |
 | `rosa-de-guadalupe.mp3` | Acusación a Tomás, pág. 17 |
-| `do-re-mi.mp3` | "Novicia rebelde", pág. 31 |
+| `do-re-mi.mp3` | Inicio (Presentador) y "Novicia rebelde", pág. 31 — empieza en 4:39 |
 | `amargura.mp3`, `cafe-con-ron.mp3` | Cues equivocados, pág. 31 |
 | `fly-me-to-the-moon.mp3`, `estoy-saliendo-con-un-chabon.mp3`, `bombon-asesino.mp3` | Inicio, junto al Presentador |
 
