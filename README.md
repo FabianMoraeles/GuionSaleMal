@@ -33,7 +33,7 @@ Guion completo de la obra (páginas 6 a 46) con las anotaciones a mano del direc
 |---|---|
 | `chan-chan.mp3` | Chan chan chaaan (varias veces) |
 | `chirrido-puerta.mp3` | Puerta, pág. 6 |
-| `timbre.mp3` | Llega el inspector, pág. 12; llega la policía, pág. 43 — empieza en 0:01.8 |
+| `timbre.mp3` | Llega el inspector, pág. 12; llega la policía, pág. 43 — empieza en 0:01.4 |
 | `love-effect.mp3` | Cada vez que se juntan Cecilio y Florencia, págs. 14–17 — empieza en 0:05.5 |
 | `telefono.mp3` | Llamada de los contadores, págs. 26–27 |
 | `sables-star-wars.mp3` | Pelea con espadas, pág. 28 |
