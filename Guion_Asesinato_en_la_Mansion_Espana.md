@@ -1184,6 +1184,7 @@
 
 **Ana:** ¿Cecilio está muerto?
 
+> `✍️ → Do re mi, luego El padrino`
 > `✍️ * Novicia Rebelde`
 > ✍️ ~~* Despechá~~
 > `✍️ * El padrino`
@@ -1192,11 +1193,10 @@
 
 **Darío:** ¡Un doble asesinato!
 
-> `✍️ “Volveré a decirlo” [?]`
-> `✍️ * Amargura sound effect`
+> `✍️ ← “Volvé a decirlo”`
+> `✍️ (Me altero porque “se trabó la compu”) → * Amargura sound effect`
 > `✍️ * Café con Ron`
 > `✍️ * Chan chan`
-> `✍️ (Me altero porque “se trabó la compu”)`
 
 ~~*Toca un breve fragmento de Girls on Film de Durán Durán, y luego, de repente, la entrada musical correcta se interpone.*~~
 
