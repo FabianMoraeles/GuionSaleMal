@@ -260,7 +260,7 @@
 
 <header>
   <div class="bar">
-    <h1>Asesinato en la Mansión España<small>Guion con audios · págs. 6–38</small></h1>
+    <h1>Asesinato en la Mansión España<small>Guion con audios · págs. 6–46</small></h1>
     <div class="ctrl">
       <select id="who-filter" aria-label="Resaltar personaje">
         <option value="">Resaltar personaje…</option>
@@ -318,6 +318,8 @@ const AUDIO = {
   rosa:     { file: "canciones/rosa-de-guadalupe.mp3",            name: "La Rosa de Guadalupe",             kind: "song" },
   amargura: { file: "canciones/amargura.mp3",                     name: "Amargura — Karol G",               kind: "song" },
   cafe:     { file: "canciones/cafe-con-ron.mp3",                 name: "Café con ron",                     kind: "song" },
+  beethoven:{ file: "canciones/quinta-sinfonia-beethoven.mp3",    name: "5ta Sinfonía de Beethoven",        kind: "song" },
+  disparo:  { file: "canciones/disparo.mp3",                      name: "Disparo (pág. 45)",                kind: "sfx"  },
 };
 
 /* =========================================================
@@ -1028,7 +1030,154 @@ const SCRIPT = [
   { w: "Darío", x: "Lo hiciste, porque Carlos sabía del dinero de la policía que estabas *(cheques de mano)* malversando." },
   { w: "Cristóbal", x: "¡Tonterías!" },
   { w: "Darío", x: "Usted mencionó que tuvo varias *(cheques en mano)* citas antes con Carlos en la estación de policía local. Usted dijo que estaba trabajando como consultor en un caso de fraude." },
-  { missing: "Fin del escaneo (pág. 38)." },
+  /* ---------------- Parte 3 ---------------- */
+  { p: "39" },
+  { w: "Roberto", x: "¿Qué hay de eso?" },
+  { w: "Darío", x: "Carlos llegó a casa esa noche muy intrigado por todo el caso. Decidió analizar el asunto personalmente. Encontró que la razón por la que no se habían realizado arrestos fue porque el hombre que cometió el fraude era usted mismo. Tú eras el malversador. *(Cheques en las manos)* ¡El perpetrador! ¡Tú fuiste el perpetrador!" },
+  { w: "Cristóbal", x: "¡No puedes probarlo!" },
+  { w: "Darío", x: "¡Pero Carlos podría y por eso lo mataste!" },
+  { w: "Cristóbal", x: "¡Nunca!" },
+  { w: "Darío", x: "¡Sé tú secreto, Inspector! ¿Qué harás? ¿Matarme también?" },
+  { w: "Cristóbal", x: "*(saca una pistola y apunta a Darío)* ¡Lo haré! ¡Se confunden!" },
+  { w: "Sandra", x: "¡Qué situación tan diabólica es esta!" },
+  { d: "Jonathan entra de nuevo sosteniendo su pistola." },
+  { w: "Jonathan", x: "¡No tan rápido Inspector!" },
+  { d: "Todos enormemente sorprendidos por esto." },
+  { w: "Roberto", x: "¿Carlos?" },
+  { w: "Cristóbal", x: "¿Señor España?", n: ["* ¡Por fin! Entró bien"] },
+  { w: "Sandra", x: "¡Carlos! ¡Pensé que estabas muerto!" },
+  { w: "Cristóbal", x: "¿Estás vivo? No es posible." },
+  { w: "Jonathan", x: "Oh, me temo que sí. No pudiste matarme esa ma…" },
+  { d: "Se repite fuerte, larga y dramática, la entrada musical tarde.", n: ["* 5ta de Beethoven"], c: ["beethoven"] },
+  { w: "Jonathan", m: "continúa", x: "Fácilmente." },
+  { w: "Cristóbal", x: "¿Cómo sobreviviste?" },
+  { w: "Jonathan", x: "¡Simplemente no bebí el agua envenenada que me dejaste esta tarde!" },
+
+  { p: "40" },
+  { w: "Cristóbal", m: "a Darío", x: "¡¿Cómo supiste que era yo?!" },
+  { w: "Jonathan", x: "¡Se lo dije a Pérez! Hemos estado trabajando juntos todo el tiempo. Desde la última vez que hablamos en la estación de policía, estaba claro a pesar de que estaba contigo. Fue en este punto que me dio miedo que intentaras matarme. Desde hace meses, he tenido mi guardia levantada y esta noche caíste en mi trampa." },
+  { w: "Darío", x: "Te has estado escondiendo en los jardines desde esta tarde cuando plantaste el veneno." },
+  { d: "Ana ha recuperado la conciencia. Ella lentamente se pone de pie con su guión. A tiempo para su señal." },
+  { w: "Sandra y Ana", m: "juntas", x: "Pensé que era extraño que llegaras tan rápido en un clima tan terrible." },
+  { w: "Darío", x: "Y luego encontraste el testamento de Carlos en su libro mayor y trataste de culparme de todo a mí." },
+  { w: "Sandra y Ana", m: "juntas", x: "Maldito demonio astuto." },
+  { w: "Jonathan", x: "Tramposo, por cierto. Pérez aquí es tan inocente como yo. ¡Quita estas esposas en este instante!" },
+  { d: "Roberto intenta quitarle las esposas a Darío, pero él no tiene la llave. Roberto busca en sus bolsillos la llave. Darío permanece esposado al diván." },
+  { w: "Jonathan", x: "¡Suelta el arma, Inspector!" },
+  { w: "Sandra y Ana", x: "~~(Juntas) ¡A mí!~~", n: ["(línea tachada)"] },
+  { w: "Cristóbal", x: "¡Nunca! Vine aquí para matarte, Carlos, y no me iré hasta que el trabajo esté terminado." },
+  { w: "Jonathan", x: "Se acabó, Inspector. Podría probar tu culpa en un segundo. Tengo las pruebas en mi estudio. Trae los papeles, Pérez." },
+
+  { p: "41" },
+  { w: "Darío", x: "Sí, señor." },
+  { d: "Se va a ir, pero sigue esposado al diván. Lentamente se va, arrastrando el diván detrás de él." },
+  { w: "Jonathan", x: "Baja tu arma, Inspector. Se acabó." },
+  { w: "Sandra y Ana", m: "juntas", x: "¡Por favor Inspector! Me estás asustando." },
+  { w: "Cristóbal", x: "¡Deberías estar asustada!" },
+  { w: "Sandra y Ana", m: "juntas", x: "¡Tú monstruo! Intentaste matar…" },
+  { d: "Sandra aplasta el pie de Ana. Ana está herida." },
+  { w: "Sandra", x: "¡Tú monstruo! ¡Intentaste matar a Carlos y mataste a Cecilio! ¡Como pudiste!" },
+  { w: "Cristóbal", x: "Admito que traté de matar a Carlos, pero nunca me acerqué a Cecilio. De hecho, cuando descubrí que tú y él tenían una aventura, me llené de alegría. Tuve el hombre perfecto para culpar. ¡Hasta que mi cómplice se equivocó!" },
+  { w: "Jonathan", x: "Es cierto. Y su cómplice, lamento decirlo, ha sido mi amigo desde que estábamos en la escuela, ¿no es así, Tomás Colvet?" },
+  { w: "Roberto", x: "Es cierto, soy cómplice del Inspector. ¡Le ayudé a mover el dinero!" },
+  { w: "Sandra", x: "¡Hermano! Estoy sorprendido de…" },
+  { d: "Ana aplasta el pie de Sandra." },
+  { w: "Ana", x: "¡Hermano, estoy sorprendido de ti! No sé en qué te has convertido." },
+  { w: "Roberto", x: "Estoy tan avergonzado. Conocí al Inspector Cardeña hace unos meses en mi club. Encontramos que entre nosotros podríamos robar dinero fácilmente de las cuentas de la policía. Cardeña tuvo el acceso, tuve la facilidad de mover el dinero rápido y mantenerlo seguro, o eso creía esta noche." },
+
+  { p: "42" },
+  { d: "Se olvida de su línea." },
+  { w: "Roberto", x: "*(A Teodoro.)* ¡Línea!" },
+  { w: "Teodoro", x: "No sé en cuál página estamos amigo.", n: ["★ (preocupado)"] },
+  { w: "Roberto", x: "¡No sé en cuál página estamos amigo!" },
+  { w: "Cristóbal", m: "susurra", x: "En cuanto a Cecilio…" },
+  { w: "Roberto", x: "En cuanto a Cecilio, eso fue más un crimen pasional, tan simple como eso…" },
+  { w: "Ana", x: "¡Cecilio! Poco lo amaba, él era mi único…" },
+  { d: "Sandra golpea a Ana boca abajo con su carpeta con un ruido sordo." },
+  { w: "Sandra", x: "¡Cecilio! Pero lo amaba, él era mi único…" },
+  { d: "Darío ha reaparecido ahora con el diván cargando los papeles, que le da a Jonathan." },
+  { w: "Darío", x: "¡Los papeles, señor España!" },
+  { d: "Jonathan toma los papeles." },
+  { w: "Jonathan", x: "Gracias Pérez. Ahora trae mis cigarrillos de la repisa de la chimenea." },
+  { w: "Darío", x: "Sí, señor." },
+  { d: "Va a la repisa de la chimenea, pero luego se da cuenta de que las cosas de fumar están fuera del escenario y va a buscarlas." },
+  { w: "Jonathan", x: "¡Ahora tengo en mi mano una lista por escrito de cada transacción fraudulenta que Tomás Colvet y el Inspector Cardeña hicieron!" },
+  { w: "Sandra", x: "Esto no puede ser verdad, no voy a creer…" },
+  { d: "Ana toma los papeles de Jonathan y se los arroja a Sandra." },
+  { w: "Roberto", x: "Pero es cierto. Cuando descubrí que él estaba interfiriendo contigo, Florencia, mi propia hermana, bueno, es más de lo que podía soportar." },
+
+  { p: "43" },
+  { w: "Jonathan", x: "Tu sórdido asunto me enfermó, Florencia. Me rompiste el corazón." },
+  { w: "Ana", x: "¡No, Charley! No debes, yo hice…" },
+  { d: "Sandra empuja a Ana fuera del camino." },
+  { w: "Sandra", x: "¡Me equivoqué! ¡Por favor, llévame de vuelta! Seré tu todo otra vez." },
+  { w: "Jonathan", x: "¿Recuperar a una mujer que me ha traicionado? ¡Nunca!" },
+  { d: "Ana y Sandra intentan acercarse a Jonathan y lo tiran al suelo." },
+  { w: "Sandra y Ana", x: "¡CARLOS! ¡Eres todo lo que tengo! ¡Quiéreme! ¡Por favor! ¡No me eches a un lado! ¡Seré una marginada en la ciudad! Mis amigos no me hablarán. ¡Nunca más volveré a sentir tu abrazo! ¡Déjame ser tu esposa!" },
+  { d: "Darío entra con los cigarrillos." },
+  { w: "Darío", x: "*(Sobre los gritos)* ¡Sus cigarrillos, señor!" },
+  { w: "Jonathan", x: "*(Sobre los gritos)* ¡Gracias, Pérez! ¡Dios sabe que podría usar un cigarrillo!" },
+  { d: "Suena el timbre. La línea disminuye.", n: ["* Sonido de timbre"], c: ["timbre"] },
+  { w: "Jonathan", x: "Trae la puerta, Pérez." },
+  { w: "Darío", x: "¡Sí, señor!" },
+  { d: "Darío sale de nuevo arrastrando el diván detrás de él." },
+  { w: "Jonathan", x: "Esa será la policía para arrestarlos a ambos." },
+  { w: "Ana", x: "¡Carlos! No puedo soportarlo, otro…" },
+  { d: "Ana agarra los tobillos de Sandra y la arrastra por la puerta." },
+  { w: "Sandra", x: "¡Carlos! ¡No puedo soportarlo otro segundo! ¡Mírame como solías mirarme!" },
+  { w: "Jonathan", x: "¡Silencio Florencia! ¡No eres nada para mí ahora!" },
+
+  { p: "44" },
+  { w: "Sandra", x: "*(Logrando levantarse)* ¡Esta es la peor noche de mi vida!" },
+  { d: "Ana golpea a Sandra en la cara y cae quedando fuera de la vista detrás de los planos de la escenografía." },
+  { w: "Ana", x: "¡No! ¡No! ¡No! ¡Esta es la peor noche de mi vida!" },
+  { w: "Jonathan", x: "No. Es mi peor noche." },
+  { d: "Ana cruza la puerta y aparece en la ventana, golpeando con furia el cuerpo inconsciente de Sandra." },
+  { w: "Jonathan", x: "Pero Tomás, Cardeña te engañó, ¿verdad?" },
+  { w: "Roberto", x: "¿Qué quieres decir?" },
+  { w: "Jonathan", x: "… ¡Él nunca tuvo la intención de compartir el dinero contigo! Déjame resumir…" },
+  { w: "Ana", x: "*(A través de la ventana)* ¡TE AMO CARLOS!" },
+  { w: "Jonathan", x: "El Inspector Cardeña sabía que te descubrí y él estaba malversando dinero de la policía, así que tramaste un…" },
+  { d: "Ana trae una gran bandeja plateada, con la que comienza a golpear a Sandra detrás de la ventana." },
+  { w: "Jonathan", x: "…planea matarme. Poniendo agua envenenada para que la tome. Luego, creyendo erróneamente que estaba muerto, el Inspector Cardeña intentó acusar de mi asesinato a Cecilio y Florencia por su aventura hasta que su cómplice Tomás cometió un error y disparó, a mi hermano Cecilio. Cardeña luego trató de culpar a Pérez después de encontrar mi último deseo en mi testamento." },
+  { d: "Ana ha reaparecido con un rollo de cinta industrial." },
+  { w: "Ana", x: "¡TÓMAME CARLOS! ¡SI SABES LO QUE ES BUENO PARA TI!" },
+  { d: "Ella comienza a pegar la mano de Sandra junto a la suya." },
+  { w: "Jonathan", x: "¡Excepto que Tomás no sabía que el Inspector hizo un retiro de novecientos mil pesos de sus cuentas privadas esta mañana planeando huir, y se llevó cada centavo! Creo que es hora de abrir su Inspector de casos adjuntos." },
+
+  { p: "45" },
+  { d: "Abre el maletín adjunto que contiene varios paquetes de recibos de banco." },
+  { w: "Roberto", x: "¡Novecientos mil pesos!" },
+  { w: "Jonathan", x: "Te dejó tener todo el riesgo almacenando el dinero robado en tus cuentas privadas. ¿No es así, Inspector?" },
+  { w: "Cristóbal", x: "Muy bien, es cierto. Falsifiqué tu firma en el banco y saqué cada centavo. No había negociado que tu contable se diera cuenta de esto rápidamente y telefoneara tan pronto." },
+  { d: "Ana ha sometido a Sandra y regresó al escenario. Roberto corre hacia Cristóbal, toma su arma y la apunta." },
+  { w: "Roberto", x: "¡Tú pícaro! ¡Confié en ti! Cometiste un error allí, conductor, y me temo que es el último." },
+  { d: "Él dispara el arma. No dispara. Él intenta el arma de nuevo, nada. Él intenta de nuevo." },
+  { w: "Cristóbal", x: "¡BANG!" },
+  { d: "Él muere. Roberto baja el arma donde explota ruidosamente hiriendo su mano.", n: ["* Disparo"], c: ["disparo"] },
+  { w: "Roberto", x: "¡ARGH! ¡Mis dedos!" },
+  { w: "Darío", x: "Los oficiales están esperando en el pasillo, se…" },
+  { d: "Él golpea la puerta con el diván, Cristóbal se quita del camino, Roberto retrocede chocando con el plano de la chimenea y también se cae. Silencio. Silencio. Quietud. Luego, rápidamente levantan los planos de la escenografía de nuevo, derribando la ventana, dejando a Ana parada en la ventana y revelando a Sandra aturdida detrás del escenario. Silencio. La quietud de nuevo. Max lanza nieve fuera del escenario." },
+  { w: "Darío", x: "Los oficiales están esperando en el pasillo, señor…" },
+
+  { p: "46" },
+  { w: "Jonathan", x: "Excelente, acompaña a mi novia abajo, Pérez. Deseo hablar con Tomás en privado." },
+  { w: "Darío", x: "Sí, señor." },
+  { d: "Darío y Ana intentan salir, pero no pueden debido al diván. Acaban escondiéndose en la puerta." },
+  { w: "Jonathan", x: "¡Tomás! ¡No eres el hombre que conocí, te has vuelto codicioso y celoso!" },
+  { w: "Roberto", x: "Lo siento, Carlos, siento que estoy a punto de desmayarme." },
+  { w: "Jonathan", x: "Hay un vaso de agua al lado del teléfono." },
+  { w: "Roberto", x: "¡Gracias, Carlos! ¡Siempre el amable anfitrión!" },
+  { w: "Jonathan", x: "Bébelo." },
+  { w: "Roberto", x: "¡Muy amable!" },
+  { d: "Él bebe el agua." },
+  { w: "Jonathan", x: "Dime Tomás, una cosa." },
+  { w: "Roberto", x: "Cualquier cosa, Carlos. ¡No diré más mentiras!" },
+  { w: "Jonathan", x: "El vaso de agua envenenada que el Inspector me dejó; ¿Qué supones que hice con eso?" },
+  { w: "Roberto", x: "Bueno, no sé… ¿Qué quieres decir? ¿No quieres decir que me diste el…? ¿Carlos? ¡¿Carlos?! *(Se agarra el estómago y se pone de frente a la audiencia)* ¡No! ¡No! ¡No!" },
+  { d: "Él muere. Max salta desde afuera del escenario. Jonathan se mueve el centro. Las luces se apagan y un círculo se pone sobre de él." },
+  { w: "Jonathan", x: "Oh, cómo hubiera querido que esto pudiera haber terminado de manera diferente. Tomás, tus mentiras y engaños te han llevado inexorablemente a este fin. Si los hombres permiten que su conciencia sea gobernada por la avaricia, entonces la muerte y la destrucción prevalecerán. *(Concluyendo)* Traicionado por mi hermano." },
+  { missing: "Fin del escaneo (pág. 46)." },
 ];
 
 const CAST = {
@@ -1041,6 +1190,7 @@ const CAST = {
   "Cristóbal":   { role: "Inspector Cardeña", color: "#4d7c0f" },
   "Ana":         { role: "Tramoya (luego hace de Florencia)", color: "#a16207" },
   "Teodoro":     { role: "Sonido", color: "#8a8172" },
+  "Sandra y Ana":{ role: "", color: "#be185d" },
   "Todos":       { role: "", color: "#8a8172" },
 };
 
@@ -1151,13 +1301,16 @@ document.getElementById("cue-list").addEventListener("click", e => {
 
 /* ================= Filtros ================= */
 const whoSel = document.getElementById("who-filter");
-Object.entries(CAST).filter(([n]) => n !== "Todos" && n !== "Presentador").forEach(([n, c]) => {
-  whoSel.insertAdjacentHTML("beforeend", `<option value="${n}">${n} — ${c.role}</option>`);
+Object.entries(CAST).filter(([n]) => !["Todos", "Presentador", "Sandra y Ana"].includes(n)).forEach(([n, c]) => {
+  whoSel.insertAdjacentHTML("beforeend", `<option value="${n}">${n}${c.role ? " — " + c.role : ""}</option>`);
 });
 whoSel.onchange = () => {
   const v = whoSel.value;
   document.body.classList.toggle("focus", !!v);
-  document.querySelectorAll(".row.line").forEach(r => r.classList.toggle("match", !!v && (r.dataset.who === v || r.dataset.who === "Todos")));
+  document.querySelectorAll(".row.line").forEach(r => {
+    const who = r.dataset.who;
+    r.classList.toggle("match", !!v && (who === "Todos" || who.split(" y ").includes(v)));
+  });
 };
 const notesBtn = document.getElementById("notes-toggle");
 notesBtn.onclick = () => {

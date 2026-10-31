@@ -2,7 +2,7 @@
 
 **Ver en línea:** https://fabianmoraeles.github.io/GuionSaleMal/
 
-Guion completo de la obra (páginas 6 a 38) con las anotaciones a mano del director y botones para disparar la música y los efectos de sonido en el momento exacto.
+Guion completo de la obra (páginas 6 a 46) con las anotaciones a mano del director y botones para disparar la música y los efectos de sonido en el momento exacto.
 
 ## Cómo usarlo durante el ensayo o la función
 
@@ -33,15 +33,17 @@ Guion completo de la obra (páginas 6 a 38) con las anotaciones a mano del direc
 |---|---|
 | `chan-chan.mp3` | Chan chan chaaan (varias veces) |
 | `chirrido-puerta.mp3` | Puerta, pág. 6 |
-| `timbre.mp3` | Llega el inspector, pág. 12 |
+| `timbre.mp3` | Llega el inspector, pág. 12; llega la policía, pág. 43 |
 | `love-effect.mp3` | Cada vez que se juntan Cecilio y Florencia, págs. 14–17 |
 | `telefono.mp3` | Llamada de los contadores, págs. 26–27 |
 | `sables-star-wars.mp3` | Pelea con espadas, pág. 28 |
 | `disparos.mp3` | Disparos en la biblioteca, pág. 29 |
+| `disparo.mp3` | El arma le explota a Roberto en la mano, pág. 45 |
 | `17-anos.mp3` | Entrada musical, pág. 7 |
 | `rosa-de-guadalupe.mp3` | Acusación a Tomás, pág. 17 |
 | `do-re-mi.mp3` | Inicio (Presentador) y "Novicia rebelde", pág. 31 — empieza en 4:39 |
 | `amargura.mp3`, `cafe-con-ron.mp3` | Cues equivocados, pág. 31 |
+| `quinta-sinfonia-beethoven.mp3` | Entrada musical cuando Carlos aparece vivo, pág. 39 |
 | `fly-me-to-the-moon.mp3`, `estoy-saliendo-con-un-chabon.mp3`, `bombon-asesino.mp3` | Inicio, junto al Presentador |
 
 **Faltan:** *Despechá* y *El Padrino* (pág. 31). Al agregarlos a `canciones/` hay que registrarlos en `AUDIO` dentro de `index.html`.

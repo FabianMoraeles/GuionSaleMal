@@ -1,6 +1,6 @@
 # Asesinato en la Mansión España
 
-> Transcripción del guion escaneado (`CamScanner 30-09-2026 14.54.pdf`), páginas 6 a 14, y de `Anotaciones libreto parte 2.pdf`, páginas 14 a 38.
+> Transcripción del guion escaneado (`CamScanner 30-09-2026 14.54.pdf`), páginas 6 a 14, y de `Anotaciones libreto parte 2.pdf`, páginas 14 a 38, y de `Libreto parte 3.pdf`, páginas 39 a 46.
 > En la parte 2 el original a veces escribe "Robert" y "Dennis"; aquí se normalizan a Roberto y Darío.
 
 ## Convenciones de esta transcripción
@@ -1498,4 +1498,305 @@
 
 ---
 
-*(El escaneo termina aquí, pág. 38.)*
+# Parte 3
+
+## Página 39
+
+**Roberto:** ¿Qué hay de eso?
+
+**Darío:** Carlos llegó a casa esa noche muy intrigado por todo el caso. Decidió analizar el asunto personalmente. Encontró que la razón por la que no se habían realizado arrestos fue porque el hombre que cometió el fraude era usted mismo. Tú eras el malversador. *(Cheques en las manos)* ¡El perpetrador! ¡Tú fuiste el perpetrador!
+
+**Cristóbal:** ¡No puedes probarlo!
+
+**Darío:** ¡Pero Carlos podría y por eso lo mataste!
+
+**Cristóbal:** ¡Nunca!
+
+**Darío:** ¡Sé tú secreto, Inspector! ¿Qué harás? ¿Matarme también?
+
+**Cristóbal:** *(saca una pistola y apunta a Darío)* ¡Lo haré! ¡Se confunden!
+
+**Sandra:** ¡Qué situación tan diabólica es esta!
+
+*Jonathan entra de nuevo sosteniendo su pistola.*
+
+**Jonathan:** ¡No tan rápido Inspector!
+
+*Todos enormemente sorprendidos por esto.*
+
+**Roberto:** ¿Carlos?
+
+**Cristóbal:** ¿Señor España?
+
+> `✍️ * ¡Por fin! Entró bien`
+
+**Sandra:** ¡Carlos! ¡Pensé que estabas muerto!
+
+**Cristóbal:** ¿Estás vivo? No es posible.
+
+**Jonathan:** Oh, me temo que sí. No pudiste matarme esa ma…
+
+*Se repite fuerte, larga y dramática, la entrada musical tarde.*
+
+> `✍️ * 5ta de Beethoven`
+
+**Jonathan** *(continúa)***:** Fácilmente.
+
+**Cristóbal:** ¿Cómo sobreviviste?
+
+**Jonathan:** ¡Simplemente no bebí el agua envenenada que me dejaste esta tarde!
+
+
+## Página 40
+
+**Cristóbal** *(a Darío)***:** ¡¿Cómo supiste que era yo?!
+
+**Jonathan:** ¡Se lo dije a Pérez! Hemos estado trabajando juntos todo el tiempo. Desde la última vez que hablamos en la estación de policía, estaba claro a pesar de que estaba contigo. Fue en este punto que me dio miedo que intentaras matarme. Desde hace meses, he tenido mi guardia levantada y esta noche caíste en mi trampa.
+
+**Darío:** Te has estado escondiendo en los jardines desde esta tarde cuando plantaste el veneno.
+
+*Ana ha recuperado la conciencia. Ella lentamente se pone de pie con su guión. A tiempo para su señal.*
+
+**Sandra y Ana** *(juntas)***:** Pensé que era extraño que llegaras tan rápido en un clima tan terrible.
+
+**Darío:** Y luego encontraste el testamento de Carlos en su libro mayor y trataste de culparme de todo a mí.
+
+**Sandra y Ana** *(juntas)***:** Maldito demonio astuto.
+
+**Jonathan:** Tramposo, por cierto. Pérez aquí es tan inocente como yo. ¡Quita estas esposas en este instante!
+
+*Roberto intenta quitarle las esposas a Darío, pero él no tiene la llave. Roberto busca en sus bolsillos la llave. Darío permanece esposado al diván.*
+
+**Jonathan:** ¡Suelta el arma, Inspector!
+
+**Sandra y Ana:** ~~(Juntas) ¡A mí!~~
+
+> `✍️ (línea tachada)`
+
+**Cristóbal:** ¡Nunca! Vine aquí para matarte, Carlos, y no me iré hasta que el trabajo esté terminado.
+
+**Jonathan:** Se acabó, Inspector. Podría probar tu culpa en un segundo. Tengo las pruebas en mi estudio. Trae los papeles, Pérez.
+
+
+## Página 41
+
+**Darío:** Sí, señor.
+
+*Se va a ir, pero sigue esposado al diván. Lentamente se va, arrastrando el diván detrás de él.*
+
+**Jonathan:** Baja tu arma, Inspector. Se acabó.
+
+**Sandra y Ana** *(juntas)***:** ¡Por favor Inspector! Me estás asustando.
+
+**Cristóbal:** ¡Deberías estar asustada!
+
+**Sandra y Ana** *(juntas)***:** ¡Tú monstruo! Intentaste matar…
+
+*Sandra aplasta el pie de Ana. Ana está herida.*
+
+**Sandra:** ¡Tú monstruo! ¡Intentaste matar a Carlos y mataste a Cecilio! ¡Como pudiste!
+
+**Cristóbal:** Admito que traté de matar a Carlos, pero nunca me acerqué a Cecilio. De hecho, cuando descubrí que tú y él tenían una aventura, me llené de alegría. Tuve el hombre perfecto para culpar. ¡Hasta que mi cómplice se equivocó!
+
+**Jonathan:** Es cierto. Y su cómplice, lamento decirlo, ha sido mi amigo desde que estábamos en la escuela, ¿no es así, Tomás Colvet?
+
+**Roberto:** Es cierto, soy cómplice del Inspector. ¡Le ayudé a mover el dinero!
+
+**Sandra:** ¡Hermano! Estoy sorprendido de…
+
+*Ana aplasta el pie de Sandra.*
+
+**Ana:** ¡Hermano, estoy sorprendido de ti! No sé en qué te has convertido.
+
+**Roberto:** Estoy tan avergonzado. Conocí al Inspector Cardeña hace unos meses en mi club. Encontramos que entre nosotros podríamos robar dinero fácilmente de las cuentas de la policía. Cardeña tuvo el acceso, tuve la facilidad de mover el dinero rápido y mantenerlo seguro, o eso creía esta noche.
+
+
+## Página 42
+
+*Se olvida de su línea.*
+
+**Roberto:** *(A Teodoro.)* ¡Línea!
+
+**Teodoro:** No sé en cuál página estamos amigo.
+
+> `✍️ ★ (preocupado)`
+
+**Roberto:** ¡No sé en cuál página estamos amigo!
+
+**Cristóbal** *(susurra)***:** En cuanto a Cecilio…
+
+**Roberto:** En cuanto a Cecilio, eso fue más un crimen pasional, tan simple como eso…
+
+**Ana:** ¡Cecilio! Poco lo amaba, él era mi único…
+
+*Sandra golpea a Ana boca abajo con su carpeta con un ruido sordo.*
+
+**Sandra:** ¡Cecilio! Pero lo amaba, él era mi único…
+
+*Darío ha reaparecido ahora con el diván cargando los papeles, que le da a Jonathan.*
+
+**Darío:** ¡Los papeles, señor España!
+
+*Jonathan toma los papeles.*
+
+**Jonathan:** Gracias Pérez. Ahora trae mis cigarrillos de la repisa de la chimenea.
+
+**Darío:** Sí, señor.
+
+*Va a la repisa de la chimenea, pero luego se da cuenta de que las cosas de fumar están fuera del escenario y va a buscarlas.*
+
+**Jonathan:** ¡Ahora tengo en mi mano una lista por escrito de cada transacción fraudulenta que Tomás Colvet y el Inspector Cardeña hicieron!
+
+**Sandra:** Esto no puede ser verdad, no voy a creer…
+
+*Ana toma los papeles de Jonathan y se los arroja a Sandra.*
+
+**Roberto:** Pero es cierto. Cuando descubrí que él estaba interfiriendo contigo, Florencia, mi propia hermana, bueno, es más de lo que podía soportar.
+
+
+## Página 43
+
+**Jonathan:** Tu sórdido asunto me enfermó, Florencia. Me rompiste el corazón.
+
+**Ana:** ¡No, Charley! No debes, yo hice…
+
+*Sandra empuja a Ana fuera del camino.*
+
+**Sandra:** ¡Me equivoqué! ¡Por favor, llévame de vuelta! Seré tu todo otra vez.
+
+**Jonathan:** ¿Recuperar a una mujer que me ha traicionado? ¡Nunca!
+
+*Ana y Sandra intentan acercarse a Jonathan y lo tiran al suelo.*
+
+**Sandra y Ana:** ¡CARLOS! ¡Eres todo lo que tengo! ¡Quiéreme! ¡Por favor! ¡No me eches a un lado! ¡Seré una marginada en la ciudad! Mis amigos no me hablarán. ¡Nunca más volveré a sentir tu abrazo! ¡Déjame ser tu esposa!
+
+*Darío entra con los cigarrillos.*
+
+**Darío:** *(Sobre los gritos)* ¡Sus cigarrillos, señor!
+
+**Jonathan:** *(Sobre los gritos)* ¡Gracias, Pérez! ¡Dios sabe que podría usar un cigarrillo!
+
+*Suena el timbre. La línea disminuye.*
+
+> `✍️ * Sonido de timbre`
+
+**Jonathan:** Trae la puerta, Pérez.
+
+**Darío:** ¡Sí, señor!
+
+*Darío sale de nuevo arrastrando el diván detrás de él.*
+
+**Jonathan:** Esa será la policía para arrestarlos a ambos.
+
+**Ana:** ¡Carlos! No puedo soportarlo, otro…
+
+*Ana agarra los tobillos de Sandra y la arrastra por la puerta.*
+
+**Sandra:** ¡Carlos! ¡No puedo soportarlo otro segundo! ¡Mírame como solías mirarme!
+
+**Jonathan:** ¡Silencio Florencia! ¡No eres nada para mí ahora!
+
+
+## Página 44
+
+**Sandra:** *(Logrando levantarse)* ¡Esta es la peor noche de mi vida!
+
+*Ana golpea a Sandra en la cara y cae quedando fuera de la vista detrás de los planos de la escenografía.*
+
+**Ana:** ¡No! ¡No! ¡No! ¡Esta es la peor noche de mi vida!
+
+**Jonathan:** No. Es mi peor noche.
+
+*Ana cruza la puerta y aparece en la ventana, golpeando con furia el cuerpo inconsciente de Sandra.*
+
+**Jonathan:** Pero Tomás, Cardeña te engañó, ¿verdad?
+
+**Roberto:** ¿Qué quieres decir?
+
+**Jonathan:** … ¡Él nunca tuvo la intención de compartir el dinero contigo! Déjame resumir…
+
+**Ana:** *(A través de la ventana)* ¡TE AMO CARLOS!
+
+**Jonathan:** El Inspector Cardeña sabía que te descubrí y él estaba malversando dinero de la policía, así que tramaste un…
+
+*Ana trae una gran bandeja plateada, con la que comienza a golpear a Sandra detrás de la ventana.*
+
+**Jonathan:** …planea matarme. Poniendo agua envenenada para que la tome. Luego, creyendo erróneamente que estaba muerto, el Inspector Cardeña intentó acusar de mi asesinato a Cecilio y Florencia por su aventura hasta que su cómplice Tomás cometió un error y disparó, a mi hermano Cecilio. Cardeña luego trató de culpar a Pérez después de encontrar mi último deseo en mi testamento.
+
+*Ana ha reaparecido con un rollo de cinta industrial.*
+
+**Ana:** ¡TÓMAME CARLOS! ¡SI SABES LO QUE ES BUENO PARA TI!
+
+*Ella comienza a pegar la mano de Sandra junto a la suya.*
+
+**Jonathan:** ¡Excepto que Tomás no sabía que el Inspector hizo un retiro de novecientos mil pesos de sus cuentas privadas esta mañana planeando huir, y se llevó cada centavo! Creo que es hora de abrir su Inspector de casos adjuntos.
+
+
+## Página 45
+
+*Abre el maletín adjunto que contiene varios paquetes de recibos de banco.*
+
+**Roberto:** ¡Novecientos mil pesos!
+
+**Jonathan:** Te dejó tener todo el riesgo almacenando el dinero robado en tus cuentas privadas. ¿No es así, Inspector?
+
+**Cristóbal:** Muy bien, es cierto. Falsifiqué tu firma en el banco y saqué cada centavo. No había negociado que tu contable se diera cuenta de esto rápidamente y telefoneara tan pronto.
+
+*Ana ha sometido a Sandra y regresó al escenario. Roberto corre hacia Cristóbal, toma su arma y la apunta.*
+
+**Roberto:** ¡Tú pícaro! ¡Confié en ti! Cometiste un error allí, conductor, y me temo que es el último.
+
+*Él dispara el arma. No dispara. Él intenta el arma de nuevo, nada. Él intenta de nuevo.*
+
+**Cristóbal:** ¡BANG!
+
+*Él muere. Roberto baja el arma donde explota ruidosamente hiriendo su mano.*
+
+> `✍️ * Disparo`
+
+**Roberto:** ¡ARGH! ¡Mis dedos!
+
+**Darío:** Los oficiales están esperando en el pasillo, se…
+
+*Él golpea la puerta con el diván, Cristóbal se quita del camino, Roberto retrocede chocando con el plano de la chimenea y también se cae. Silencio. Silencio. Quietud. Luego, rápidamente levantan los planos de la escenografía de nuevo, derribando la ventana, dejando a Ana parada en la ventana y revelando a Sandra aturdida detrás del escenario. Silencio. La quietud de nuevo. Max lanza nieve fuera del escenario.*
+
+**Darío:** Los oficiales están esperando en el pasillo, señor…
+
+
+## Página 46
+
+**Jonathan:** Excelente, acompaña a mi novia abajo, Pérez. Deseo hablar con Tomás en privado.
+
+**Darío:** Sí, señor.
+
+*Darío y Ana intentan salir, pero no pueden debido al diván. Acaban escondiéndose en la puerta.*
+
+**Jonathan:** ¡Tomás! ¡No eres el hombre que conocí, te has vuelto codicioso y celoso!
+
+**Roberto:** Lo siento, Carlos, siento que estoy a punto de desmayarme.
+
+**Jonathan:** Hay un vaso de agua al lado del teléfono.
+
+**Roberto:** ¡Gracias, Carlos! ¡Siempre el amable anfitrión!
+
+**Jonathan:** Bébelo.
+
+**Roberto:** ¡Muy amable!
+
+*Él bebe el agua.*
+
+**Jonathan:** Dime Tomás, una cosa.
+
+**Roberto:** Cualquier cosa, Carlos. ¡No diré más mentiras!
+
+**Jonathan:** El vaso de agua envenenada que el Inspector me dejó; ¿Qué supones que hice con eso?
+
+**Roberto:** Bueno, no sé… ¿Qué quieres decir? ¿No quieres decir que me diste el…? ¿Carlos? ¡¿Carlos?! *(Se agarra el estómago y se pone de frente a la audiencia)* ¡No! ¡No! ¡No!
+
+*Él muere. Max salta desde afuera del escenario. Jonathan se mueve el centro. Las luces se apagan y un círculo se pone sobre de él.*
+
+**Jonathan:** Oh, cómo hubiera querido que esto pudiera haber terminado de manera diferente. Tomás, tus mentiras y engaños te han llevado inexorablemente a este fin. Si los hombres permiten que su conciencia sea gobernada por la avaricia, entonces la muerte y la destrucción prevalecerán. *(Concluyendo)* Traicionado por mi hermano.
+
+---
+
+*(El escaneo termina aquí, pág. 46.)*
