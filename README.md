@@ -8,6 +8,7 @@ Guion completo de la obra (páginas 6 a 46) con las anotaciones a mano del direc
 
 - Cada línea con un cue tiene a la derecha un botón **▶**. Al tocarlo suena el audio; al tocarlo de nuevo se detiene.
 - Los **efectos** (chan chan, teléfono, disparos, love effect…) se pueden superponer. Las **canciones** se reemplazan entre sí: si empieza una, se detiene la anterior.
+- **Al abrir la página se descargan todos los audios** (unos 55 MB). Abajo se ve el avance; cuando dice **✓ audios listos**, cada botón suena al instante. Conviene abrir la página unos minutos antes de la función, con buena conexión, y no recargarla.
 - La barra de abajo muestra lo que está sonando. **■ Detener todo** o la tecla **Esc** apaga todo.
 - **Resaltar personaje** atenúa las demás líneas para que cada actor siga solo las suyas.
 - **Notas a mano** muestra u oculta las anotaciones del director (en azul, letra manuscrita).

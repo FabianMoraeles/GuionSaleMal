@@ -190,6 +190,7 @@
   .cue:hover { filter: brightness(.97); }
   .cue.pending { background: transparent; border-style: dashed; border-color: var(--pending); color: var(--muted); cursor: default; }
   .cue.pending .ico { background: var(--pending); }
+  .cue.loading .ico { opacity: .4; }
   .slot { display: flex; flex-direction: column; gap: 4px; }
   .slot select { font-size: .74rem; padding: 4px 8px; border-radius: 6px; width: 100%; }
   .slot-title { font: 600 1.05rem/1 "Caveat", cursive; color: var(--pen); padding-left: 4px; }
@@ -217,6 +218,11 @@
   .dock .btn.stop { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); font-weight: 700; }
   .dock input[type=range] { width: 90px; accent-color: var(--accent); }
   .dock label { display: flex; gap: 6px; align-items: center; opacity: .85; }
+  .dock .load { display: flex; align-items: center; gap: 8px; font-size: .76rem; white-space: nowrap; }
+  .dock .load .bar { width: 80px; height: 4px; border-radius: 2px; overflow: hidden; background: color-mix(in srgb, var(--paper) 25%, transparent); }
+  .dock .load .bar i { display: block; height: 100%; width: 0; background: var(--accent); transition: width .2s; }
+  .dock .load.done { opacity: .7; }
+  .dock .load.done .bar { display: none; }
 
   /* ---------- Drawer ---------- */
   .drawer {
@@ -277,6 +283,7 @@
 
 <div class="dock" role="region" aria-label="Reproduciendo">
   <div class="now" id="now"><span class="idle">Nada sonando · Esc detiene todo</span></div>
+  <div class="load" id="load" role="status"><span id="load-txt">Cargando audios…</span><span class="bar"><i id="load-bar"></i></span></div>
   <label>Vol <input type="range" id="vol" min="0" max="1" step="0.05" value="1"></label>
   <button class="btn stop" id="stop-all">■ Detener todo</button>
 </div>
@@ -1321,26 +1328,115 @@ notesBtn.onclick = () => {
 
 /* ================= Audio ================= */
 const players = {};      // id -> HTMLAudioElement
+const ready = {};        // id -> true cuando el audio ya está completo en memoria
+const pending = {};      // id -> elemento precargado que espera a que termine el que suena
 let volume = 1;
 
+const startOf = id => AUDIO[id].start || 0;
+// Deja el audio parado justo en su punto de inicio (evita buscar al hacer clic)
+function rewind(id, a) { if (Math.abs(a.currentTime - startOf(id)) > 0.01) a.currentTime = startOf(id); }
+
+function wire(id, a) {
+  a.volume = volume;
+  a.addEventListener("ended", () => { rewind(id, a); swapPending(id); refresh(); });
+  a.addEventListener("timeupdate", () => {
+    const end = AUDIO[id].end;
+    if (end && a.currentTime >= end) { stop(id); refresh(); }
+  });
+  return a;
+}
+
+// Solo se usa si se toca un audio antes de que termine su precarga
 function player(id) {
   if (!players[id]) {
-    const a = new Audio(AUDIO[id].file);
-    a.preload = AUDIO[id].kind === "sfx" ? "auto" : "metadata";
-    a.volume = volume;
-    a.addEventListener("ended", () => { a.currentTime = startOf(id); refresh(); });
-    a.addEventListener("timeupdate", () => {
-      const end = AUDIO[id].end;
-      if (end && a.currentTime >= end) { stop(id); refresh(); }
-    });
+    const a = wire(id, new Audio(AUDIO[id].file));
+    a.preload = "auto";
     a.addEventListener("error", () => alert(`No se pudo cargar: ${AUDIO[id].file}`));
     players[id] = a;
   }
   return players[id];
 }
-const startOf = id => AUDIO[id].start || 0;
 function isPlaying(id) { const a = players[id]; return a && !a.paused; }
-function stop(id) { const a = players[id]; if (a) { a.pause(); a.currentTime = startOf(id); } }
+function stop(id) { const a = players[id]; if (a) { a.pause(); rewind(id, a); swapPending(id); } }
+function swapPending(id) {
+  if (pending[id] && !isPlaying(id)) { players[id] = pending[id]; delete pending[id]; }
+}
+
+/* ---------- Precarga: todos los audios a memoria al abrir la página ---------- */
+const loadQueue = [
+  ...Object.keys(AUDIO).filter(id => AUDIO[id].kind === "sfx"),   // efectos primero (pesan poco)
+  ...Object.keys(AUDIO).filter(id => AUDIO[id].kind !== "sfx"),
+];
+const loadTotal = loadQueue.length;
+let loadDone = 0, loadBytes = 0, loadFailed = 0;
+
+function showLoad() {
+  const box = document.getElementById("load");
+  const mb = (loadBytes / 1048576).toFixed(0);
+  document.getElementById("load-bar").style.width = (loadDone / loadTotal * 100) + "%";
+  if (loadDone < loadTotal) {
+    document.getElementById("load-txt").textContent = `Cargando audios ${loadDone}/${loadTotal} · ${mb} MB`;
+  } else {
+    box.classList.add("done");
+    document.getElementById("load-txt").textContent = loadFailed
+      ? `⚠ ${loadFailed} audio(s) no se pudieron precargar`
+      : `✓ ${loadTotal} audios listos`;
+  }
+}
+
+async function fetchBlob(file) {
+  const res = await fetch(file);
+  if (!res.ok) throw new Error(res.status);
+  if (!res.body) { const b = await res.blob(); loadBytes += b.size; return b; }
+  const reader = res.body.getReader(), chunks = [];
+  for (;;) {
+    const { done, value } = await reader.read();
+    if (done) break;
+    chunks.push(value); loadBytes += value.length; showLoad();
+  }
+  return new Blob(chunks, { type: "audio/mpeg" });
+}
+
+function whenLoaded(a) {
+  return new Promise(resolve => {
+    if (a.readyState >= 4) return resolve();
+    const done = () => { a.removeEventListener("canplaythrough", done); a.removeEventListener("error", done); resolve(); };
+    a.addEventListener("canplaythrough", done);
+    a.addEventListener("error", done);
+    setTimeout(done, 20000);
+  });
+}
+
+async function preload(id) {
+  let src;
+  try { src = URL.createObjectURL(await fetchBlob(AUDIO[id].file)); }
+  catch (e) { src = AUDIO[id].file; }   // p. ej. abierto como archivo local: el navegador lo carga directo
+  const a = wire(id, new Audio());
+  a.preload = "auto";
+  a.src = src;
+  a.load();
+  await whenLoaded(a);
+  if (a.error) { loadFailed++; return; }
+  rewind(id, a);
+  if (players[id] && isPlaying(id)) pending[id] = a;
+  else { if (players[id]) players[id].pause(); players[id] = a; }
+  ready[id] = true;
+}
+
+async function loadWorker() {
+  while (loadQueue.length) {
+    const id = loadQueue.shift();
+    try { await preload(id); } catch (e) { loadFailed++; }
+    loadDone++; showLoad(); refresh();
+  }
+}
+// Si se toca un audio que aún no está listo, pasa al frente de la fila
+function prioritize(id) {
+  const i = loadQueue.indexOf(id);
+  if (i > 0) { loadQueue.splice(i, 1); loadQueue.unshift(id); }
+}
+showLoad();
+for (let i = 0; i < 3; i++) loadWorker();
 // Duración y avance relativos al recorte start/end
 function span(id) {
   const a = players[id], s = startOf(id), e = AUDIO[id].end || a.duration;
@@ -1353,8 +1449,9 @@ function toggle(id) {
   if (AUDIO[id].kind === "song") {
     Object.keys(players).forEach(o => { if (o !== id && AUDIO[o].kind === "song") stop(o); });
   }
+  if (!ready[id]) prioritize(id);
   const a = player(id);
-  a.currentTime = startOf(id);
+  rewind(id, a);
   a.play().catch(() => {});
   refresh();
   tick();
@@ -1366,6 +1463,7 @@ function refresh() {
   document.querySelectorAll(".cue[data-audio]").forEach(btn => {
     const id = btn.dataset.audio, a = players[id], on = isPlaying(id);
     btn.classList.toggle("playing", !!on);
+    btn.classList.toggle("loading", !ready[id] && !on);
     btn.querySelector(".ico").textContent = on ? "■" : "▶";
     const t = on && a.duration ? span(id) : null;
     btn.style.setProperty("--p", t ? t.pos / t.len : 0);
@@ -1399,7 +1497,7 @@ document.getElementById("stop-all").onclick = stopAll;
 document.addEventListener("keydown", e => { if (e.key === "Escape") { stopAll(); toggleDrawer(false); } });
 document.getElementById("vol").oninput = e => {
   volume = +e.target.value;
-  Object.values(players).forEach(a => a.volume = volume);
+  [...Object.values(players), ...Object.values(pending)].forEach(a => a.volume = volume);
 };
 </script>
 </body>
