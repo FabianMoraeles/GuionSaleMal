@@ -47,7 +47,7 @@ Guion completo de la obra (páginas 6 a 46) con las anotaciones a mano del direc
 | `quinta-sinfonia-beethoven.mp3` | Entrada musical cuando Carlos aparece vivo, pág. 39 |
 | `fly-me-to-the-moon.mp3`, `estoy-saliendo-con-un-chabon.mp3`, `bombon-asesino.mp3` | Inicio, junto al Presentador; *Bombón asesino* también al final |
 | `fuiste-gilda.mp3`, `por-lo-que-yo-te-quiero.mp3`, `no-me-arrepiento-de-este-amor.mp3`, `pasito-a-pasito.mp3`, `mentirosa-rafaga.mp3`, `cumbia-villera.mp3`, `cumbia-de-los-trapos.mp3`, `laura-se-te-ve-la-tanga.mp3` | Mix de entrada, al inicio de la página (orden de Liz) |
-| `dont-cry-for-me-argentina.mp3` | Empieza en 2:47 (estribillo) |
+| `dont-cry-for-me-argentina.mp3` | "Yuls interrumpe", págs. 23 y 38 — empieza en 2:47 (estribillo) |
 
 **Faltan:** *La vecina* de Amar Azul (mix de entrada), *Despechá* y *El Padrino* (pág. 31). Al agregarlos a `canciones/` hay que registrarlos en `AUDIO` dentro de `index.html`.
 
