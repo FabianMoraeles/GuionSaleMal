@@ -121,6 +121,8 @@
   }
   .page-mark:first-child { margin-top: 0; }
   .page-mark::before, .page-mark::after { content: ""; height: 1px; background: var(--rule); flex: 1; }
+  .page-mark.sect { color: var(--accent); font-weight: 700; }
+  .page-mark.sect::before, .page-mark.sect::after { background: var(--accent); }
   .missing {
     text-align: center; color: var(--muted); font-style: italic;
     border: 1px dashed var(--rule); border-radius: 10px; padding: 14px;
@@ -310,7 +312,17 @@
    archivo. Ej.: start: 75 empieza en 1:15; end: 95 corta en 1:35.
    ========================================================= */
 const AUDIO = {
-  chan:     { file: "canciones/chan-chan.mp3",                    name: "Chan chan chaaan",                 kind: "sfx"  },
+  // Mix de entrada (orden de Liz)
+  fuiste:   { file: "canciones/fuiste-gilda.mp3",                 name: "Fuiste — Gilda",                   kind: "song" },
+  porloque: { file: "canciones/por-lo-que-yo-te-quiero.mp3",      name: "Por lo que yo te quiero — Walter Olmos", kind: "song" },
+  arrepiento:{ file: "canciones/no-me-arrepiento-de-este-amor.mp3", name: "No me arrepiento de este amor — Gilda", kind: "song" },
+  pasito:   { file: "canciones/pasito-a-pasito.mp3",              name: "Pasito a pasito — Gilda",          kind: "song" },
+  mentirosa:{ file: "canciones/mentirosa-rafaga.mp3",             name: "Mentirosa — Ráfaga",               kind: "song" },
+  villera:  { file: "canciones/cumbia-villera.mp3",               name: "Cumbia villera — Yerba Brava",     kind: "song" },
+  trapos:   { file: "canciones/cumbia-de-los-trapos.mp3",         name: "Cumbia de los trapos — Yerba Brava", kind: "song" },
+  laura:    { file: "canciones/laura-se-te-ve-la-tanga.mp3",      name: "Laura, se te ve la tanga — Damas Gratis", kind: "song" },
+  argentina:{ file: "canciones/dont-cry-for-me-argentina.mp3",    name: "Don't Cry for Me Argentina",       kind: "song", start: 167 }, // desde 2:47, el estribillo
+  chan:    { file: "canciones/chan-chan.mp3",                    name: "Chan chan chaaan",                 kind: "sfx"  },
   chirrido: { file: "canciones/chirrido-puerta.mp3",              name: "Chirrido de puerta",               kind: "sfx"  },
   timbre:   { file: "canciones/timbre.mp3",                       name: "Timbre",                           kind: "sfx", start: 1.0 }, // salta el primer 1.0 s
   love:     { file: "canciones/love-effect.mp3",                  name: "Love effect",                      kind: "sfx", start: 5.5 }, // salta los primeros 5.5 s
@@ -326,7 +338,7 @@ const AUDIO = {
   amargura: { file: "canciones/amargura.mp3",                     name: "Amargura — Karol G",               kind: "song" },
   cafe:     { file: "canciones/cafe-con-ron.mp3",                 name: "Café con ron",                     kind: "song" },
   beethoven:{ file: "canciones/quinta-sinfonia-beethoven.mp3",    name: "5ta Sinfonía de Beethoven",        kind: "song" },
-  disparo:  { file: "canciones/disparo.mp3",                      name: "Disparo (pág. 45)",                kind: "sfx"  },
+  disparo:  { file: "canciones/disparo.mp3",                      name: "Disparo (pág. 45)",                kind: "sfx", start: 3.25 }, // salta 3.25 s de silencio
 };
 
 /* =========================================================
@@ -336,6 +348,7 @@ const AUDIO = {
    o se fija aquí con `audio: "id"`.
    ========================================================= */
 const SLOTS = {
+  vecina:   { label: "La vecina — Amar Azul",           audio: null },
   meant:    { label: "Intervención: Meant to Be Yours", audio: null },
   audition: { label: "Intervención: la audición",       audio: null },
   musica8:  { label: "Música (pág. 8)",                 audio: null },
@@ -350,9 +363,23 @@ const SLOTS = {
    GUION
    p: página · w: personaje · m: modificador (en off) · d: acotación
    x: texto (*cursiva*, ~~tachado~~) · n: notas a mano · c: cues
+   h: separador con título (pg: nombre en la lista de cues)
    c acepta ids de AUDIO o "slot:<id>"
    ========================================================= */
 const SCRIPT = [
+  { h: "Mix de entrada", pg: "Mix" },
+  { d: "1. Fuiste — Gilda", c: ["fuiste"] },
+  { d: "2. Por lo que yo te quiero — Walter Olmos", c: ["porloque"] },
+  { d: "3. No me arrepiento de este amor — Gilda", c: ["arrepiento"] },
+  { d: "4. La vecina — Amar Azul", c: ["slot:vecina"] },
+  { d: "5. Pasito a pasito — Gilda", c: ["pasito"] },
+  { d: "6. Mentirosa — Ráfaga", c: ["mentirosa"] },
+  { d: "7. Cumbia villera — Yerba Brava", c: ["villera"] },
+  { d: "8. Cumbia de los trapos — Yerba Brava", c: ["trapos"] },
+  { d: "9. Estoy saliendo con un chabón — Los Sultanes", c: ["chabon"] },
+  { d: "10. Laura, se te ve la tanga — Damas Gratis", c: ["laura"] },
+  { d: "11. Bombón asesino — Los Palmeras", c: ["bombon"] },
+
   { p: "6" },
   { w: "Presentador", x: "…Finalmente, ahora podemos permitirnos organizar una presentación como debe de ser, y que, puedo decir, está excepcionalmente bien hecha. Estoy seguro de que nadie olvidará los problemas a los que nos enfrentamos antes de esa presentación. Pero ahora, con nuestro evento principal, ¡estoy seguro de que será nuestro mejor espectáculo hasta ahora! Así que, sin más preámbulos, por favor, junten sus manos para ver la emocionante y misteriosa obra de teatro *Asesinato en la Mansión España*.",
     c: ["flyme", "chabon", "bombon", "doremi"] },
@@ -758,7 +785,7 @@ const SCRIPT = [
   { d: "Roberto, Ana y Jonathan han logrado sacar a Sandra por la ventana. Ana cierra las cortinas." },
   { w: "Max", x: "Bueno… ¡Inspector bravo! Muy bien. Te has enterado de Florencia y de mí, pero eso no prueba nada. No tuvimos nada que ver con el asesinato de Carlos, pero puedo decirte quién sí tiene que ver." },
   { w: "Cristóbal", x: "Quién." },
-  { w: "Max", x: "Tomás Colvet." },
+  { w: "Max", x: "Tomás Colvet.", n: ["* Chan chan chan"], c: ["chan"] },
   { w: "Cristóbal", x: "¿Colvet? Pero él y Carlos eran viejos amigos, ¿verdad?" },
   { w: "Max", x: "Es un hombre peligrosamente trastornado, con un temperamento diabólico y Florencia es su hermana. Lo he dicho antes y lo repetiré: no podía entregar a su hermana a ningún hombre, mucho menos a su compañero de la vieja escuela. La fiesta de compromiso de esta noche hizo que el zumbido en su cabeza le hiciera perder el control y arremetiera contra Carlos. Un crimen pasional tal vez, pero ahí está." },
   { w: "Cristóbal", x: "Gracias, Señor España, ha sido de gran ayuda. Tal vez podría ir a buscar a Tomás Colvet. Voy a tener que seguir más de una línea de investigación a la vez para llegar al fondo de esto." },
@@ -841,6 +868,7 @@ const SCRIPT = [
   { w: "Roberto", m: "en off", x: "¡Disparos en la biblioteca!" },
   { w: "Darío", x: "¡Por Jesús!" },
   { d: "Cristóbal se apresura en ir." },
+  { h: "Blackout · Intermedio" },
   { w: "Cristóbal", x: "Dios mío, ¿qué está pasando?" },
   { w: "Darío", x: "No lo sé, inspector, escuché gritos que venían de abajo." },
   { d: "Roberto entra, deteniéndose." },
@@ -1184,6 +1212,7 @@ const SCRIPT = [
   { w: "Roberto", x: "Bueno, no sé… ¿Qué quieres decir? ¿No quieres decir que me diste el…? ¿Carlos? ¡¿Carlos?! *(Se agarra el estómago y se pone de frente a la audiencia)* ¡No! ¡No! ¡No!" },
   { d: "Él muere. Max salta desde afuera del escenario. Jonathan se mueve el centro. Las luces se apagan y un círculo se pone sobre de él." },
   { w: "Jonathan", x: "Oh, cómo hubiera querido que esto pudiera haber terminado de manera diferente. Tomás, tus mentiras y engaños te han llevado inexorablemente a este fin. Si los hombres permiten que su conciencia sea gobernada por la avaricia, entonces la muerte y la destrucción prevalecerán. *(Concluyendo)* Traicionado por mi hermano." },
+  { d: "Final: Bombón asesino.", c: ["bombon"] },
   { missing: "Fin del escaneo (pág. 46)." },
 ];
 
@@ -1252,6 +1281,7 @@ function renderSlot(slotId) {
 let html = "";
 SCRIPT.forEach((item, i) => {
   if (item.p) { page = item.p; html += `<div class="page-mark" id="pag-${item.p}">Página ${item.p}</div>`; return; }
+  if (item.h) { if (item.pg) page = item.pg; html += `<div class="page-mark sect">${esc(item.h)}</div>`; return; }
   if (item.missing) { html += `<div class="page-mark"></div><div class="missing">${esc(item.missing)}</div>`; return; }
 
   const isDir = !!item.d;
