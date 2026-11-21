@@ -8,7 +8,7 @@ Guion completo de la obra (páginas 6 a 46) con las anotaciones a mano del direc
 
 - Cada línea con un cue tiene a la derecha un botón **▶**. Al tocarlo suena el audio; al tocarlo de nuevo se detiene.
 - Los **efectos** (chan chan, teléfono, disparos, love effect…) se pueden superponer. Las **canciones** se reemplazan entre sí: si empieza una, se detiene la anterior.
-- **Al abrir la página se descargan todos los audios** (unos 105 MB). Abajo se ve el avance; cuando dice **✓ audios listos**, cada botón suena al instante. Conviene abrir la página unos minutos antes de la función, con buena conexión, y no recargarla.
+- **Al abrir la página se descargan todos los audios** (unos 110 MB). Abajo se ve el avance; cuando dice **✓ audios listos**, cada botón suena al instante. Conviene abrir la página unos minutos antes de la función, con buena conexión, y no recargarla.
 - La barra de abajo muestra lo que está sonando. **■ Detener todo** o la tecla **Esc** apaga todo.
 - **Resaltar personaje** atenúa las demás líneas para que cada actor siga solo las suyas.
 - **Notas a mano** muestra u oculta las anotaciones del director (en azul, letra manuscrita).
@@ -47,9 +47,10 @@ Guion completo de la obra (páginas 6 a 46) con las anotaciones a mano del direc
 | `quinta-sinfonia-beethoven.mp3` | Entrada musical cuando Carlos aparece vivo, pág. 39 |
 | `fly-me-to-the-moon.mp3`, `estoy-saliendo-con-un-chabon.mp3`, `bombon-asesino.mp3` | Inicio, junto al Presentador; *Bombón asesino* también al final |
 | `fuiste-gilda.mp3`, `por-lo-que-yo-te-quiero.mp3`, `no-me-arrepiento-de-este-amor.mp3`, `pasito-a-pasito.mp3`, `mentirosa-rafaga.mp3`, `cumbia-villera.mp3`, `cumbia-de-los-trapos.mp3`, `laura-se-te-ve-la-tanga.mp3` | Mix de entrada, al inicio de la página (orden de Liz) |
+| `despecha-rosalia.mp3`, `el-padrino.mp3` | Ana "¡Sí, yo!" y "¿Cecilio está muerto?", pág. 31 — El Padrino empieza en 0:02.6 |
 | `dont-cry-for-me-argentina.mp3` | "Yuls interrumpe", págs. 23 y 38 — empieza en 2:47 (estribillo) |
 
-**Faltan:** *La vecina* de Amar Azul (mix de entrada), *Despechá* y *El Padrino* (pág. 31). Al agregarlos a `canciones/` hay que registrarlos en `AUDIO` dentro de `index.html`.
+**Falta:** *La vecina* de Amar Azul (mix de entrada). Al agregarlos a `canciones/` hay que registrarlos en `AUDIO` dentro de `index.html`.
 
 ### Hacer que un audio empiece en cierto minuto
 
