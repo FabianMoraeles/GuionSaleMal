@@ -51,6 +51,7 @@ Guion completo de la obra (páginas 6 a 46) con las anotaciones a mano del direc
 | `fly-me-to-the-moon.mp3`, `estoy-saliendo-con-un-chabon.mp3`, `bombon-asesino.mp3` | Inicio, junto al Presentador; *Bombón asesino* también al final |
 | `primera-llamada.mp3`, `segunda-llamada.mp3` | Al inicio, antes del mix (cortadas de `Intermedio.ogg`: 0:00.3–0:15.3 y 0:16.8–0:22.5) |
 | `intermedio.mp3`, `intermedio-segunda-llamada.mp3`, `intermedio-tercera-llamada.mp3` | Intermedio, después de "¡Disparos en la biblioteca!", pág. 29 (0:26.3–0:44.3, 0:45.7–0:51.0, 0:55.5–final) |
+| `mix-intermedio.mp3` | Mix del intermedio (~20 min), justo después de la tercera llamada del intermedio, pág. 29 |
 | `teatro-mix.mp3` | Mix de entrada (56 min), al inicio de la página — recodificado a 128 kbps para que pese menos de 100 MB |
 | `despecha-rosalia.mp3`, `el-padrino.mp3` | Ana "¡Sí, yo!" y "¿Cecilio está muerto?", pág. 31 — El Padrino empieza en 0:02.6 |
 | `dont-cry-for-me-argentina.mp3` | "Yuls interrumpe", págs. 23 y 38 — empieza en 2:47 (estribillo) |
