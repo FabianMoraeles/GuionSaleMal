@@ -312,6 +312,12 @@
    archivo. Ej.: start: 75 empieza en 1:15; end: 95 corta en 1:35.
    ========================================================= */
 const AUDIO = {
+  // Llamadas (cortadas de Intermedio.ogg)
+  llamada1: { file: "canciones/primera-llamada.mp3",              name: "Primera llamada",                  kind: "sfx"  },
+  llamada2: { file: "canciones/segunda-llamada.mp3",              name: "Segunda llamada",                  kind: "sfx"  },
+  interm:   { file: "canciones/intermedio.mp3",                   name: "Intermedio",                       kind: "sfx"  },
+  interm2:  { file: "canciones/intermedio-segunda-llamada.mp3",   name: "Segunda llamada (intermedio)",     kind: "sfx"  },
+  interm3:  { file: "canciones/intermedio-tercera-llamada.mp3",   name: "Tercera llamada (intermedio)",     kind: "sfx"  },
   mix:      { file: "canciones/teatro-mix.mp3",                   name: "Teatro mix",                       kind: "song" },
   argentina:{ file: "canciones/dont-cry-for-me-argentina.mp3",    name: "Don't Cry for Me Argentina",       kind: "song", start: 167 }, // desde 2:47, el estribillo
   chan:    { file: "canciones/chan-chan.mp3",                    name: "Chan chan chaaan",                 kind: "sfx"  },
@@ -358,6 +364,10 @@ const SLOTS = {
    c acepta ids de AUDIO o "slot:<id>"
    ========================================================= */
 const SCRIPT = [
+  { h: "Llamadas", pg: "Inicio" },
+  { d: "Primera llamada.", c: ["llamada1"] },
+  { d: "Segunda llamada.", c: ["llamada2"] },
+
   { h: "Mix de entrada", pg: "Mix" },
   { d: "Teatro mix (56 min).", c: ["mix"] },
 
@@ -850,6 +860,9 @@ const SCRIPT = [
   { w: "Darío", x: "¡Por Jesús!" },
   { d: "Cristóbal se apresura en ir." },
   { h: "Blackout · Intermedio" },
+  { d: "Intermedio.", c: ["interm"] },
+  { d: "Segunda llamada.", c: ["interm2"] },
+  { d: "Tercera llamada.", c: ["interm3"] },
   { w: "Cristóbal", x: "Dios mío, ¿qué está pasando?" },
   { w: "Darío", x: "No lo sé, inspector, escuché gritos que venían de abajo." },
   { d: "Roberto entra, deteniéndose." },
