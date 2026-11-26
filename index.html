@@ -1373,13 +1373,19 @@ function swapPending(id) {
   if (pending[id] && !isPlaying(id)) { players[id] = pending[id]; delete pending[id]; }
 }
 
-/* ---------- Precarga: todos los audios a memoria al abrir la página ---------- */
-const loadQueue = [
-  ...Object.keys(AUDIO).filter(id => AUDIO[id].kind === "sfx"),   // efectos primero (pesan poco)
-  ...Object.keys(AUDIO).filter(id => AUDIO[id].kind !== "sfx"),
-];
+/* ---------- Precarga: todos los audios a memoria al abrir la página ----------
+   Efectos primero (pesan poco); luego canciones en el orden en que aparecen en el guion. */
+const scriptOrder = SCRIPT.flatMap(i => (i.c || []).map(c => c.startsWith("slot:") ? slotAudio(c.slice(5)) : c));
+const byOrder = sfx => [...new Set([...scriptOrder, ...Object.keys(AUDIO)])]
+  .filter(id => AUDIO[id] && (AUDIO[id].kind === "sfx") === sfx);
+const loadQueue = [...byOrder(true), ...byOrder(false)];
 const loadTotal = loadQueue.length;
-let loadDone = 0, loadBytes = 0, loadFailed = 0;
+let loadDone = 0, loadBytes = 0, loadFailed = 0, fromDisk = 0;
+
+// Copia de los audios en este dispositivo: tras la primera visita cargan del disco, aun sin internet
+const CACHE = "guion-audios-v1";
+const cacheP = "caches" in window ? caches.open(CACHE).catch(() => null) : Promise.resolve(null);
+navigator.storage?.persist?.().catch(() => {});   // pide que el navegador no la borre
 
 function showLoad() {
   const box = document.getElementById("load");
@@ -1391,21 +1397,51 @@ function showLoad() {
     box.classList.add("done");
     document.getElementById("load-txt").textContent = loadFailed
       ? `⚠ ${loadFailed} audio(s) no se pudieron precargar`
-      : `✓ ${loadTotal} audios listos`;
+      : `✓ ${loadTotal} audios listos` + (savedOk ? " · guardados en este dispositivo" : "");
   }
 }
+let savedOk = false;
 
 async function fetchBlob(file) {
+  const cache = await cacheP;
+  const hit = cache && await cache.match(file).catch(() => null);
+  if (hit) {
+    const b = await hit.blob();
+    loadBytes += b.size; fromDisk++; savedOk = true;
+    revalidate(cache, file, hit);
+    return b;
+  }
   const res = await fetch(file);
   if (!res.ok) throw new Error(res.status);
-  if (!res.body) { const b = await res.blob(); loadBytes += b.size; return b; }
-  const reader = res.body.getReader(), chunks = [];
-  for (;;) {
-    const { done, value } = await reader.read();
-    if (done) break;
-    chunks.push(value); loadBytes += value.length; showLoad();
+  let blob;
+  if (!res.body) { blob = await res.blob(); loadBytes += blob.size; }
+  else {
+    const reader = res.body.getReader(), chunks = [];
+    for (;;) {
+      const { done, value } = await reader.read();
+      if (done) break;
+      chunks.push(value); loadBytes += value.length; showLoad();
+    }
+    blob = new Blob(chunks, { type: "audio/mpeg" });
   }
-  return new Blob(chunks, { type: "audio/mpeg" });
+  if (cache) {
+    const headers = { "Content-Type": "audio/mpeg", "X-Version": version(res) };
+    cache.put(file, new Response(blob, { headers })).then(() => { savedOk = true; showLoad(); }).catch(() => {});
+  }
+  return blob;
+}
+
+// Si el archivo cambió en el servidor, actualiza la copia guardada (se usa en la próxima visita)
+const version = r => r.headers.get("ETag") || r.headers.get("Last-Modified") || "";
+function revalidate(cache, file, hit) {
+  const old = hit.headers.get("X-Version");
+  if (!old) return;
+  fetch(file, { method: "HEAD", cache: "no-store" }).then(r => {
+    const now = r.ok && version(r);
+    if (!now || now === old) return;
+    return fetch(file, { cache: "no-store" }).then(r2 => r2.ok && r2.blob().then(b =>
+      cache.put(file, new Response(b, { headers: { "Content-Type": "audio/mpeg", "X-Version": version(r2) } }))));
+  }).catch(() => {});
 }
 
 function whenLoaded(a) {
@@ -1448,6 +1484,20 @@ function prioritize(id) {
 }
 showLoad();
 for (let i = 0; i < 3; i++) loadWorker();
+
+// La página también queda guardada para abrirse sin internet
+if ("serviceWorker" in navigator && location.protocol.startsWith("http")) navigator.serviceWorker.register("sw.js").catch(() => {});
+
+// Mantiene la pantalla encendida para que el navegador no suspenda la página durante la función
+let wakeLock = null;
+async function keepAwake() {
+  if (wakeLock || !navigator.wakeLock || document.visibilityState !== "visible") return;
+  try { wakeLock = await navigator.wakeLock.request("screen"); wakeLock.addEventListener("release", () => wakeLock = null); }
+  catch (e) {}
+}
+document.addEventListener("visibilitychange", keepAwake);
+document.addEventListener("pointerdown", keepAwake);
+keepAwake();
 // Duración y avance relativos al recorte start/end
 function span(id) {
   const a = players[id], s = startOf(id), e = AUDIO[id].end || a.duration;

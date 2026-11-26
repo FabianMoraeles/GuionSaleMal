@@ -8,7 +8,10 @@ Guion completo de la obra (páginas 6 a 46) con las anotaciones a mano del direc
 
 - Cada línea con un cue tiene a la derecha un botón **▶**. Al tocarlo suena el audio; al tocarlo de nuevo se detiene.
 - Los **efectos** (chan chan, teléfono, disparos, love effect…) se pueden superponer. Las **canciones** se reemplazan entre sí: si empieza una, se detiene la anterior.
-- **Al abrir la página se descargan todos los audios** (unos 120 MB). Abajo se ve el avance; cuando dice **✓ audios listos**, cada botón suena al instante. Conviene abrir la página unos minutos antes de la función, con buena conexión, y no recargarla.
+- **Al abrir la página se descargan todos los audios** (unos 120 MB) y **quedan guardados en el dispositivo**. Abajo se ve el avance; cuando dice **✓ audios listos · guardados en este dispositivo**, cada botón suena al instante.
+- Desde la segunda vez, la página y los audios cargan del dispositivo en un par de segundos, **aunque no haya internet**. Recomendado: abrirla una vez con wifi antes del ensayo general, en el mismo navegador y aparato que se usará en la función.
+- Si se reemplaza un audio en GitHub, la copia guardada se actualiza sola en la siguiente visita con internet.
+- Mientras la página está abierta, la pantalla no se apaga sola (para que el navegador no la suspenda).
 - La barra de abajo muestra lo que está sonando. **■ Detener todo** o la tecla **Esc** apaga todo.
 - **Resaltar personaje** atenúa las demás líneas para que cada actor siga solo las suyas.
 - **Notas a mano** muestra u oculta las anotaciones del director (en azul, letra manuscrita).
@@ -67,6 +70,7 @@ Eso hace que suene del 1:10 al 1:25.
 - `index.html` — la página interactiva (guion, cues y reproductor en un solo archivo).
 - `Guion_Asesinato_en_la_Mansion_Espana.md` — la misma transcripción en texto, con las notas a mano marcadas con ✍️.
 - `canciones/` — música y efectos.
+- `sw.js` — guarda la página para abrirla sin internet.
 
 ## Publicar cambios
 
