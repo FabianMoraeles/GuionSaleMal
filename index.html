@@ -312,15 +312,7 @@
    archivo. Ej.: start: 75 empieza en 1:15; end: 95 corta en 1:35.
    ========================================================= */
 const AUDIO = {
-  // Mix de entrada (orden de Liz)
-  fuiste:   { file: "canciones/fuiste-gilda.mp3",                 name: "Fuiste — Gilda",                   kind: "song" },
-  porloque: { file: "canciones/por-lo-que-yo-te-quiero.mp3",      name: "Por lo que yo te quiero — Walter Olmos", kind: "song" },
-  arrepiento:{ file: "canciones/no-me-arrepiento-de-este-amor.mp3", name: "No me arrepiento de este amor — Gilda", kind: "song" },
-  pasito:   { file: "canciones/pasito-a-pasito.mp3",              name: "Pasito a pasito — Gilda",          kind: "song" },
-  mentirosa:{ file: "canciones/mentirosa-rafaga.mp3",             name: "Mentirosa — Ráfaga",               kind: "song" },
-  villera:  { file: "canciones/cumbia-villera.mp3",               name: "Cumbia villera — Yerba Brava",     kind: "song" },
-  trapos:   { file: "canciones/cumbia-de-los-trapos.mp3",         name: "Cumbia de los trapos — Yerba Brava", kind: "song" },
-  laura:    { file: "canciones/laura-se-te-ve-la-tanga.mp3",      name: "Laura, se te ve la tanga — Damas Gratis", kind: "song" },
+  mix:      { file: "canciones/teatro-mix.mp3",                   name: "Teatro mix",                       kind: "song" },
   argentina:{ file: "canciones/dont-cry-for-me-argentina.mp3",    name: "Don't Cry for Me Argentina",       kind: "song", start: 167 }, // desde 2:47, el estribillo
   chan:    { file: "canciones/chan-chan.mp3",                    name: "Chan chan chaaan",                 kind: "sfx"  },
   chirrido: { file: "canciones/chirrido-puerta.mp3",              name: "Chirrido de puerta",               kind: "sfx"  },
@@ -350,7 +342,6 @@ const AUDIO = {
    o se fija aquí con `audio: "id"`.
    ========================================================= */
 const SLOTS = {
-  vecina:   { label: "La vecina — Amar Azul",           audio: null },
   meant:    { label: "Intervención: Meant to Be Yours", audio: null },
   audition: { label: "Intervención: la audición",       audio: null },
   musica8:  { label: "Música (pág. 8)",                 audio: null },
@@ -368,17 +359,7 @@ const SLOTS = {
    ========================================================= */
 const SCRIPT = [
   { h: "Mix de entrada", pg: "Mix" },
-  { d: "1. Fuiste — Gilda", c: ["fuiste"] },
-  { d: "2. Por lo que yo te quiero — Walter Olmos", c: ["porloque"] },
-  { d: "3. No me arrepiento de este amor — Gilda", c: ["arrepiento"] },
-  { d: "4. La vecina — Amar Azul", c: ["slot:vecina"] },
-  { d: "5. Pasito a pasito — Gilda", c: ["pasito"] },
-  { d: "6. Mentirosa — Ráfaga", c: ["mentirosa"] },
-  { d: "7. Cumbia villera — Yerba Brava", c: ["villera"] },
-  { d: "8. Cumbia de los trapos — Yerba Brava", c: ["trapos"] },
-  { d: "9. Estoy saliendo con un chabón — Los Sultanes", c: ["chabon"] },
-  { d: "10. Laura, se te ve la tanga — Damas Gratis", c: ["laura"] },
-  { d: "11. Bombón asesino — Los Palmeras", c: ["bombon"] },
+  { d: "Teatro mix (56 min).", c: ["mix"] },
 
   { p: "6" },
   { w: "Presentador", x: "…Finalmente, ahora podemos permitirnos organizar una presentación como debe de ser, y que, puedo decir, está excepcionalmente bien hecha. Estoy seguro de que nadie olvidará los problemas a los que nos enfrentamos antes de esa presentación. Pero ahora, con nuestro evento principal, ¡estoy seguro de que será nuestro mejor espectáculo hasta ahora! Así que, sin más preámbulos, por favor, junten sus manos para ver la emocionante y misteriosa obra de teatro *Asesinato en la Mansión España*.",
